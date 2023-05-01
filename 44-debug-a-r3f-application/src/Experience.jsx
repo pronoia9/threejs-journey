@@ -1,5 +1,6 @@
 import { OrbitControls } from '@react-three/drei';
 import { useControls } from 'leva';
+import { Perf } from 'r3f-perf';
 
 import Cube from './Cube';
 import Sphere from './Sphere';
@@ -17,6 +18,8 @@ export default function Experience() {
 
   return (
     <>
+      <Perf position='top-left' />
+
       {/* Controls */}
       <OrbitControls makeDefault />
 
