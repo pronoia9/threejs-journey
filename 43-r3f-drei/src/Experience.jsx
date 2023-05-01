@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { OrbitControls, TransformControls, PivotControls, Html, Text } from '@react-three/drei';
+import { OrbitControls, TransformControls, PivotControls, Html, Text, Float } from '@react-three/drei';
 
 export default function Experience() {
   const sphereRef = useRef(),
@@ -43,17 +43,19 @@ export default function Experience() {
           <meshStandardMaterial color='greenyellow' />
         </mesh>
 
-        <Text
-          font='./bangers-v20-latin-regular.woff'
-          fontSize={1}
-          color='salmon'
-          position={[0, 2, 0]}
-          maxWidth={2} // line break
-          textAlign='center'
-        >
-          I Love R3F
-          {/* <meshNormalMaterial /> */}
-        </Text>
+        <Float speed={2} floatIntensity={1}>
+          <Text
+            font='./bangers-v20-latin-regular.woff'
+            fontSize={1}
+            color='salmon'
+            position={[0, 2, 0]}
+            maxWidth={2} // line break
+            textAlign='center'
+          >
+            I Love R3F
+            {/* <meshNormalMaterial /> */}
+          </Text>
+        </Float>
       </group>
     </group>
   );
