@@ -2,6 +2,8 @@ import { useRef } from 'react';
 import { useFrame, extend, useThree } from '@react-three/fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
+import CustomObjects from './CustomObjects';
+
 extend({ OrbitControls });
 
 export default function App() {
@@ -20,22 +22,23 @@ export default function App() {
       <orbitControls args={[camera, gl.domElement]} />
 
       {/* Lights */}
-      <directionalLight />
+      <directionalLight position={[1, 2, 3]} intensity={1.5} />
+      <ambientLight intensity={0.5} />
 
       {/* Meshes */}
       <group ref={objsGroupRef}>
         <mesh position={[-2, 0, 0]}>
           <sphereGeometry />
-          <meshStandardMaterial color='orange' />
+          <meshStandardMaterial color='navy' />
         </mesh>
         <mesh position={[2, 0, 0]} rotation={[0, Math.PI * 0.25, 0]} scale={1.5} ref={cubeRef}>
           <boxGeometry />
-          <meshStandardMaterial color='purple' />
+          <meshStandardMaterial color='hotpink' />
         </mesh>
       </group>
       <mesh position={[0, -1, 0]} rotation={[-Math.PI * 0.5, 0, 0]} scale={10}>
         <planeGeometry />
-        <meshStandardMaterial color='green' />
+        <meshStandardMaterial color='indigo' />
       </mesh>
     </group>
   );
