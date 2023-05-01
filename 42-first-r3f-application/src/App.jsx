@@ -16,7 +16,7 @@ export default function App() {
 
   return (
     <group>
-      {/* <OrbitControls /> */}
+      <orbitControls args={[camera, gl.domElement]} />
 
       <group ref={objsGroupRef}>
         <mesh position={[-2, 0, 0]}>
