@@ -6,6 +6,7 @@ import Cube from './Cube';
 import Sphere from './Sphere';
 
 export default function Experience() {
+  const { perfVisible } = useControls({ perfVisible: false });
   const { sPosition, sScale, sColor, sVisibility } = useControls('sphere', {
     sPosition: { value: { x: -2, y: 0 }, step: 0.01, joystick: 'invertY' },
     sScale: 1,
@@ -18,7 +19,7 @@ export default function Experience() {
 
   return (
     <>
-      <Perf position='top-left' />
+      {perfVisible && <Perf position='top-left' />}
 
       {/* Controls */}
       <OrbitControls makeDefault />
