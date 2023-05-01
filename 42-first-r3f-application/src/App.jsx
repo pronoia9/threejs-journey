@@ -16,21 +16,26 @@ export default function App() {
 
   return (
     <group>
+      {/* Camera */}
       <orbitControls args={[camera, gl.domElement]} />
 
+      {/* Lights */}
+      <directionalLight />
+
+      {/* Meshes */}
       <group ref={objsGroupRef}>
         <mesh position={[-2, 0, 0]}>
           <sphereGeometry />
-          <meshBasicMaterial color='orange' />
+          <meshStandardMaterial color='orange' />
         </mesh>
         <mesh position={[2, 0, 0]} rotation={[0, Math.PI * 0.25, 0]} scale={1.5} ref={cubeRef}>
           <boxGeometry />
-          <meshBasicMaterial color='purple' />
+          <meshStandardMaterial color='purple' />
         </mesh>
       </group>
       <mesh position={[0, -1, 0]} rotation={[-Math.PI * 0.5, 0, 0]} scale={10}>
         <planeGeometry />
-        <meshBasicMaterial color='green' />
+        <meshStandardMaterial color='green' />
       </mesh>
     </group>
   );
