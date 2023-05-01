@@ -40,6 +40,7 @@ export default function App() {
         <planeGeometry />
         <meshStandardMaterial color='indigo' />
       </mesh>
+      <CustomObjects />
     </group>
   );
 }
