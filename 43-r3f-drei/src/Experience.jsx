@@ -7,7 +7,7 @@ export default function Experience() {
   return (
     <group>
       {/* Controls */}
-      {/* <OrbitControls /> */}
+      <OrbitControls makeDefault />
 
       {/* Lights */}
       <directionalLight position={[1, 2, 3]} intensity={1.5} />
