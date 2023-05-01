@@ -3,8 +3,8 @@ import { useFrame } from '@react-three/fiber';
 
 export default function App() {
   const cubeRef = useRef();
-  useFrame(() => {
-    cubeRef.current.rotation.y += 0.01;
+  useFrame((state, delta) => {
+    cubeRef.current.rotation.y += delta;
   });
 
   return (
