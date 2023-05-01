@@ -1,13 +1,19 @@
+import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 
 export default function App() {
+  const cubeRef = useRef();
+  useFrame(() => {
+    cubeRef.current.rotation.y += 0.01;
+  });
+
   return (
     <group>
       <mesh position={[-2, 0, 0]}>
         <sphereGeometry />
         <meshBasicMaterial color='orange' />
       </mesh>
-      <mesh position={[2, 0, 0]} rotation={[0, Math.PI * 0.25, 0]} scale={1.5}>
+      <mesh position={[2, 0, 0]} rotation={[0, Math.PI * 0.25, 0]} scale={1.5} ref={cubeRef}>
         <boxGeometry />
         <meshBasicMaterial color='purple' />
       </mesh>
