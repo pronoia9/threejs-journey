@@ -1,6 +1,6 @@
-export default function Cube() {
+export default function Cube({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1 }) {
   return (
-    <mesh position-x={2} scale={1.5}>
+    <mesh position={[...position]} scale={scale}>
       <boxGeometry />
       <meshStandardMaterial color='mediumpurple' />
     </mesh>
