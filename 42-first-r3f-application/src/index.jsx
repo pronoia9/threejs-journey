@@ -7,7 +7,10 @@ import App from './App';
 const root = ReactDOM.createRoot(document.querySelector('#root'));
 
 root.render(
-  <Canvas>
+  <Canvas
+    // orthographic
+    camera={{ fov: 45, /* zoom: 100, */ near: 0.1, far: 200, position: [3, 2, 6] }}
+  >
     <App />
   </Canvas>
 );
