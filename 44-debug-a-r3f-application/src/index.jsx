@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+import { Leva } from 'leva';
 import { Canvas } from '@react-three/fiber';
 
 import './style.css';
@@ -9,6 +10,7 @@ const root = ReactDOM.createRoot(document.querySelector('#root'));
 
 root.render(
   <StrictMode>
+    <Leva collapsed />
     <Canvas
       camera={{
         fov: 45,
