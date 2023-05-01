@@ -5,6 +5,10 @@ import Cube from './Cube';
 import Sphere from './Sphere';
 
 export default function Experience() {
+  const { spherePosition } = useControls({
+    spherePosition: { value: { x: -2, y: 0 }, step: 0.01, joystick: 'invertY' },
+  });
+
   return (
     <>
       {/* Controls */}
@@ -15,7 +19,7 @@ export default function Experience() {
       <ambientLight intensity={0.5} />
 
       {/* Objects */}
-      <Sphere />
+      <Sphere position={[...Object.values(spherePosition), 0]} scale={1} />
       <Cube position={[2, 0, 0]} scale={1.5} />
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry />
