@@ -5,10 +5,11 @@ import Cube from './Cube';
 import Sphere from './Sphere';
 
 export default function Experience() {
-  const { spherePosition, sphereScale, sphereColor } = useControls({
+  const { spherePosition, sphereScale, sphereColor, sphereVisibility } = useControls({
     spherePosition: { value: { x: -2, y: 0 }, step: 0.01, joystick: 'invertY' },
     sphereScale: 1,
     sphereColor: '#ff0000',
+    sphereVisibility: true,
   });
 
   return (
@@ -21,7 +22,12 @@ export default function Experience() {
       <ambientLight intensity={0.5} />
 
       {/* Objects */}
-      <Sphere position={[...Object.values(spherePosition), 0]} scale={sphereScale} color={sphereColor} />
+      <Sphere
+        position={[...Object.values(spherePosition), 0]}
+        scale={sphereScale}
+        color={sphereColor}
+        visible={sphereVisibility}
+      />
       <Cube position={[2, 0, 0]} scale={1.5} />
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry />
