@@ -1,4 +1,6 @@
 import { OrbitControls } from '@react-three/drei';
+import { useControls } from 'leva';
+
 import Cube from './Cube';
 import Sphere from './Sphere';
 
