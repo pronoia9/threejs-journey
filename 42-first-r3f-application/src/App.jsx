@@ -15,16 +15,16 @@ export default function App() {
     cubeRef.current.rotation.y += delta;
     // objsGroupRef.current.rotation.y += delta;
 
-    const angle = state.clock.elapsedTime;
-    state.camera.position.x = Math.sin(angle) * 5;
-    state.camera.position.z = Math.cos(angle) * 5;
-    state.camera.lookAt(0, 0, 0);
+    // const angle = state.clock.elapsedTime;
+    // state.camera.position.x = Math.sin(angle) * 5;
+    // state.camera.position.z = Math.cos(angle) * 5;
+    // state.camera.lookAt(0, 0, 0);
   });
 
   return (
     <group>
       {/* Camera */}
-      {/* <orbitControls args={[camera, gl.domElement]} /> */}
+      <orbitControls args={[camera, gl.domElement]} />
 
       {/* Lights */}
       <directionalLight position={[1, 2, 3]} intensity={1.5} />
