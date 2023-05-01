@@ -16,11 +16,12 @@ export default function Experience() {
 
       {/* Objects */}
       <group>
-        <mesh position-x={-2} ref={sphereRef}>
-          <sphereGeometry />
-          <meshStandardMaterial color='orange' />
-        </mesh>
-        <PivotControls object={sphereRef} />
+        <PivotControls anchor={[0, 0, 0]} depthTest={false} lineWidth={1} scale={100} fixed={true}>
+          <mesh position-x={-2} ref={sphereRef}>
+            <sphereGeometry />
+            <meshStandardMaterial color='orange' />
+          </mesh>
+        </PivotControls>
 
         <mesh position-x={2} scale={1.5} ref={cubeRef}>
           <boxGeometry />
