@@ -1,8 +1,12 @@
 import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, extend, useThree } from '@react-three/fiber';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+extend({ OrbitControls });
 
 export default function App() {
-  const cubeRef = useRef(),
+  const { camera, gl } = useThree(),
+    cubeRef = useRef(),
     objsGroupRef = useRef();
 
   useFrame((state, delta) => {
@@ -12,6 +16,8 @@ export default function App() {
 
   return (
     <group>
+      {/* <OrbitControls /> */}
+
       <group ref={objsGroupRef}>
         <mesh position={[-2, 0, 0]}>
           <sphereGeometry />
