@@ -1,8 +1,9 @@
 import { useRef } from 'react';
-import { OrbitControls, TransformControls } from '@react-three/drei';
+import { PivotControls, TransformControls, OrbitControls } from '@react-three/drei';
 
 export default function Experience() {
-  const cubeRef = useRef();
+  const sphereRef = useRef(),
+    cubeRef = useRef();
 
   return (
     <group>
@@ -15,10 +16,11 @@ export default function Experience() {
 
       {/* Objects */}
       <group>
-        <mesh position-x={-2}>
+        <mesh position-x={-2} ref={sphereRef}>
           <sphereGeometry />
           <meshStandardMaterial color='orange' />
         </mesh>
+        <PivotControls object={sphereRef} />
 
         <mesh position-x={2} scale={1.5} ref={cubeRef}>
           <boxGeometry />
