@@ -8,8 +8,10 @@ import {
   softShadows,
   AccumulativeShadows,
   RandomizedLight,
+  ContactShadows,
 } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
+import { useControls } from 'leva';
 
 // softShadows({ frustum: 3.75, size: 0.005, near: 9.5, samples: 17, rings: 11 });
 
@@ -17,40 +19,45 @@ export default function Experience() {
   const cube = useRef(),
     dirLightRef = useRef();
 
+  // Animation
   useFrame((state, delta) => {
-    const time = state.clock.elapsedTime;
-    cube.current.position.x = 2 + Math.sin(time);
+    // const time = state.clock.elapsedTime;
+    // cube.current.position.x = 2 + Math.sin(time);
     cube.current.rotation.y += delta * 0.2;
   });
 
+  // Helper
   useHelper(dirLightRef, DirectionalLightHelper, 1);
+
+  // GUI
+  const { color, opacity, blur } = useControls('contact shadows', {
+    color: { value: '#1d8f75' },
+    opacity: { value: 0.4, min: 0, max: 1 },
+    blur: { value: 2.8, min: 0, max: 10 },
+  });
 
   return (
     <>
-      {/* <BakeShadows /> */}
+      <BakeShadows />
 
       <Perf position='top-left' />
 
       <OrbitControls makeDefault />
 
-      <AccumulativeShadows
+      {/* <AccumulativeShadows position={[0, -0.99, 0]} scale={10} color='#316d39' opacity={0.8} frames={Infinity} temporal blend={100} >
+        <RandomizedLight amount={8} radius={1} ambient={0.5} intensity={1} position={[1, 2, 3]} bias={0.001} />
+      </AccumulativeShadows> */}
+
+      <ContactShadows
         position={[0, -0.99, 0]}
         scale={10}
-        color='#316d39'
-        opacity={0.8}
-        frames={Infinity}
-        temporal
-        blend={100}
-      >
-        <RandomizedLight
-          amount={8}
-          radius={1}
-          ambient={0.5}
-          intensity={1}
-          position={[1, 2, 3]}
-          bias={0.001}
-        />
-      </AccumulativeShadows>
+        resolution={512}
+        far={5}
+        color={color}
+        opacity={opacity}
+        blur={blur}
+        frames={1}
+      />
 
       <directionalLight
         ref={dirLightRef}
