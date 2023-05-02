@@ -34,37 +34,41 @@ export default function Experience() {
 
   // GUI
   const { color, opacity, blur } = useControls('contact shadows', {
-    color: { value: '#1d8f75' },
+    color: { value: '#4b2709' },
     opacity: { value: 0.4, min: 0, max: 1 },
     blur: { value: 2.8, min: 0, max: 10 },
   });
   const { sunPosition } = useControls('sky', {
     sunPosition: { value: [1, 2, 3] },
   });
-  const { envMapIntensity } = useControls('environment map', {
+  const { envMapIntensity, envMapHeight, envMapRadius, envMapScale } = useControls('environment map', {
     envMapIntensity: { value: 3.5, min: 2, max: 12 },
+    envMapHeight: { value: 7, min: 0, max: 100 },
+    envMapRadius: { value: 20, min: 10, max: 1000 },
+    envMapScale: { value: 100, min: 10, max: 1000 },
   });
 
   return (
     <>
       <Environment
-        background
+        // background
         // files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'}
-        preset='night'
-        resolution={32}
+        preset='sunset'
+        // resolution={32}
+        ground={{ height: envMapHeight, radius: envMapRadius, scale: envMapScale }}
       >
         <color args={['black']} attach='background' />
         {/* <mesh position={[0, 0, -5]} scale={10}>
           <planeGeometry />
           <meshBasicMaterial color={[2, 0, 0]} />
         </mesh> */}
-        <Lightformer
+        {/* <Lightformer
           position={[0, 0, -5]}
           scale={10}
           color='red'
           intensity={5}
           // form='ring'
-        />
+        /> */}
       </Environment>
       <BakeShadows />
 
@@ -104,18 +108,20 @@ export default function Experience() {
 
       {/* <Sky sunPosition={sunPosition} /> */}
 
-      <mesh position-x={-2} castShadow>
-        <sphereGeometry />
-        <meshStandardMaterial color='orange' envMapIntensity={envMapIntensity} />
-      </mesh>
-      <mesh ref={cube} position-x={2} scale={1.5} castShadow>
-        <boxGeometry />
-        <meshStandardMaterial color='mediumpurple' envMapIntensity={envMapIntensity} />
-      </mesh>
-      <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10} /*receiveShadow*/>
-        <planeGeometry />
-        <meshStandardMaterial color='greenyellow' envMapIntensity={envMapIntensity} />
-      </mesh>
+      <group position-y={1}>
+        <mesh position-x={-2} castShadow>
+          <sphereGeometry />
+          <meshStandardMaterial color='orange' envMapIntensity={envMapIntensity} />
+        </mesh>
+        <mesh ref={cube} position-x={2} scale={1.5} castShadow>
+          <boxGeometry />
+          <meshStandardMaterial color='mediumpurple' envMapIntensity={envMapIntensity} />
+        </mesh>
+        {/* <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10} //receiveShadow/>
+           <planeGeometry />
+          <meshStandardMaterial color='greenyellow' envMapIntensity={envMapIntensity} /> 
+        </mesh> */}
+      </group>
     </>
   );
 }
