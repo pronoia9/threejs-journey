@@ -10,6 +10,7 @@ import {
   RandomizedLight,
   ContactShadows,
   Sky,
+  Environment,
 } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 import { useControls } from 'leva';
@@ -39,9 +40,22 @@ export default function Experience() {
   const { sunPosition } = useControls('sky', {
     sunPosition: { value: [1, 2, 3] },
   });
+  const { envMapIntensity } = useControls('environment map', {
+    envMapIntensity: { value: 3.5, min: 2, max: 12 },
+  });
 
   return (
     <>
+      <Environment
+        files={[
+          './environmentMaps/3/px.jpg',
+          './environmentMaps/3/nx.jpg',
+          './environmentMaps/3/py.jpg',
+          './environmentMaps/3/ny.jpg',
+          './environmentMaps/3/pz.jpg',
+          './environmentMaps/3/nz.jpg',
+        ]}
+      />
       <BakeShadows />
 
       <Perf position='top-left' />
@@ -63,7 +77,7 @@ export default function Experience() {
         frames={1}
       />
 
-      <directionalLight
+      {/* <directionalLight
         ref={dirLightRef}
         position={sunPosition}
         intensity={1.5}
@@ -76,23 +90,23 @@ export default function Experience() {
         shadow-camera-bottom={-5}
         shadow-camera-left={-5}
       />
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.5} /> */}
 
-      <Sky sunPosition={sunPosition} />
+      {/* <Sky sunPosition={sunPosition} /> */}
 
       <mesh position-x={-2} castShadow>
         <sphereGeometry />
-        <meshStandardMaterial color='orange' />
+        <meshStandardMaterial color='orange' envMapIntensity={envMapIntensity} />
       </mesh>
 
       <mesh ref={cube} position-x={2} scale={1.5} castShadow>
         <boxGeometry />
-        <meshStandardMaterial color='mediumpurple' />
+        <meshStandardMaterial color='mediumpurple' envMapIntensity={envMapIntensity} />
       </mesh>
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10} /*receiveShadow*/>
         <planeGeometry />
-        <meshStandardMaterial color='greenyellow' />
+        <meshStandardMaterial color='greenyellow' envMapIntensity={envMapIntensity} />
       </mesh>
     </>
   );
