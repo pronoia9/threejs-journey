@@ -46,7 +46,17 @@ export default function Experience() {
 
   return (
     <>
-      <Environment background files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'} />
+      <Environment
+        background
+        // files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'}
+        // preset='night'
+      >
+        <color args={['black']} attach='background' />
+        <mesh position={[0, 0, -5]} scale={10}>
+          <planeGeometry />
+          <meshBasicMaterial color={[2, 0, 0]} />
+        </mesh>
+      </Environment>
       <BakeShadows />
 
       <Perf position='top-left' />
@@ -89,12 +99,10 @@ export default function Experience() {
         <sphereGeometry />
         <meshStandardMaterial color='orange' envMapIntensity={envMapIntensity} />
       </mesh>
-
       <mesh ref={cube} position-x={2} scale={1.5} castShadow>
         <boxGeometry />
         <meshStandardMaterial color='mediumpurple' envMapIntensity={envMapIntensity} />
       </mesh>
-
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10} /*receiveShadow*/>
         <planeGeometry />
         <meshStandardMaterial color='greenyellow' envMapIntensity={envMapIntensity} />
