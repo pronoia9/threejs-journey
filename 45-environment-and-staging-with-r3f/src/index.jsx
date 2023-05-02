@@ -24,7 +24,7 @@ root.render(
     // shadows
     // onCreated={created}
   >
-    <color args={['black']} attach='background' />
+    <color args={['ivory']} attach='background' />
     <Experience />
   </Canvas>
 );
