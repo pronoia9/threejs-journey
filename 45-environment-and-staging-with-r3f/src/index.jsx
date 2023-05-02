@@ -21,6 +21,7 @@ root.render(
       far: 200,
       position: [-4, 3, 6],
     }}
+    shadows
     // onCreated={created}
   >
     <color args={['black']} attach='background' />
