@@ -1,8 +1,10 @@
 import { useRef } from 'react';
 import { DirectionalLightHelper } from 'three';
 import { useFrame } from '@react-three/fiber';
-import { OrbitControls, useHelper, BakeShadows } from '@react-three/drei';
+import { OrbitControls, useHelper, BakeShadows, softShadows } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
+
+softShadows({ frustum: 3.75, size: 0.005, near: 9.5, samples: 17, rings: 11 });
 
 export default function Experience() {
   const cube = useRef(),
@@ -16,7 +18,7 @@ export default function Experience() {
 
   return (
     <>
-      <BakeShadows />
+      {/* <BakeShadows /> */}
 
       <Perf position='top-left' />
 
@@ -30,10 +32,10 @@ export default function Experience() {
         shadow-mapSize={[1024, 1024]}
         shadow-camera-near={1}
         shadow-camera-far={10}
-        shadow-camera-top={2}
-        shadow-camera-right={2}
-        shadow-camera-bottom={-2}
-        shadow-camera-left={-2}
+        shadow-camera-top={5}
+        shadow-camera-right={5}
+        shadow-camera-bottom={-5}
+        shadow-camera-left={-5}
       />
       <ambientLight intensity={0.5} />
 
