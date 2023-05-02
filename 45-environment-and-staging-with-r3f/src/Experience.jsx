@@ -11,6 +11,7 @@ import {
   ContactShadows,
   Sky,
   Environment,
+  Lightformer,
 } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 import { useControls } from 'leva';
@@ -49,13 +50,21 @@ export default function Experience() {
       <Environment
         background
         // files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'}
-        // preset='night'
+        preset='night'
+        resolution={32}
       >
         <color args={['black']} attach='background' />
-        <mesh position={[0, 0, -5]} scale={10}>
+        {/* <mesh position={[0, 0, -5]} scale={10}>
           <planeGeometry />
           <meshBasicMaterial color={[2, 0, 0]} />
-        </mesh>
+        </mesh> */}
+        <Lightformer
+          position={[0, 0, -5]}
+          scale={10}
+          color='red'
+          intensity={5}
+          // form='ring'
+        />
       </Environment>
       <BakeShadows />
 
