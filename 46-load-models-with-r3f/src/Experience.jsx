@@ -32,6 +32,10 @@ export default function Experience() {
       >
         <Hamburger scale={0.35} />
       </Suspense>
+
+      <Suspense>
+        <Fox />
+      </Suspense>
     </>
   );
 }
