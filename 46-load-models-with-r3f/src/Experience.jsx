@@ -19,7 +19,9 @@ export default function Experience() {
         <meshStandardMaterial color='greenyellow' />
       </mesh>
 
-      <Model />
+      <Suspense>
+        <Model />
+      </Suspense>
     </>
   );
 }
