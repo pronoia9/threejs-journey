@@ -3,6 +3,7 @@ import { OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 import Model from './Model';
+import ModelPlaceholder from './ModelPlaceholder';
 
 export default function Experience() {
   return (
@@ -19,18 +20,9 @@ export default function Experience() {
         <meshStandardMaterial color='greenyellow' />
       </mesh>
 
-      <Suspense fallback={<ModelFallback />}>
+      <Suspense fallback={<ModelPlaceholder />}>
         <Model />
       </Suspense>
     </>
-  );
-}
-
-function ModelFallback() {
-  return (
-    <mesh position={[0, 0.5, 0]} scale={[2, 3, 2]}>
-      <boxGeometry args={[1, 1, 1, 2, 2, 2]} />
-      <meshBasicMaterial wireframe color='red' />
-    </mesh>
   );
 }
