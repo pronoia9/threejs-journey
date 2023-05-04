@@ -1,5 +1,6 @@
 import { useGLTF } from '@react-three/drei';
 
+useGLTF.preload('./hamburger-draco.glb');
 export default function Model() {
   const hamburger = useGLTF('./hamburger-draco.glb');
 
@@ -9,5 +10,3 @@ export default function Model() {
     </>
   );
 }
-
-useGLTF.preload('./hamburger-draco.glb');
