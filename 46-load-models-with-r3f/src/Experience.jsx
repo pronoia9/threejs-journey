@@ -34,7 +34,7 @@ export default function Experience() {
       </Suspense>
 
       <Suspense>
-        <Fox />
+        <Fox scale={0.02} position={[-2.5, 0, 2.5]} rotation={[0, 0.3, 0]} />
       </Suspense>
     </>
   );
