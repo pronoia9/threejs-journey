@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useAnimations } from '@react-three/drei';
+import { useControls } from 'leva';
 
 useGLTF.preload('./Fox/glTF/Fox.gltf');
 
@@ -8,14 +9,18 @@ export default function Fox(props) {
   const fox = useGLTF('./Fox/glTF/Fox.gltf');
   const animations = useAnimations(fox.animations, fox.scene);
 
+  const { currAnimation } = useControls('fox animations', {
+    currAnimation: { options: [...animations.names] },
+  });
+
   useEffect(() => {
-    // animations.actions.Survey.play();
-    animations.actions.Run.play();
-    setTimeout(() => {
-      animations.actions.Walk.play();
-      animations.actions.Survey.crossFadeFrom(animations.actions.Run, 1);
-    }, 2000);
-  }, []);
+    const action = animations.actions[currAnimation];
+    action.reset().fadeIn(0.5).play();
+
+    return () => {
+      action.fadeOut(0.5);
+    };
+  }, [currAnimation]);
 
   return (
     <>
