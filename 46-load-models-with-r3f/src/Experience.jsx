@@ -2,9 +2,9 @@ import { Suspense } from 'react';
 import { OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
-import Model from './Model';
 import ModelPlaceholder from './ModelPlaceholder';
 import Hamburger from './Hamburger';
+import Fox from './Fox';
 
 export default function Experience() {
   return (
