@@ -1,9 +1,13 @@
 import { useGLTF } from '@react-three/drei';
 
-useGLTF.preload('./Fox/glTF-Binary/Fox.glb');
+useGLTF.preload('./Fox/glTF/Fox.gltf');
 
 export default function Fox() {
-  const fox = useGLTF('./Fox/glTF-Binary/Fox.glb');
+  const fox = useGLTF('./Fox/glTF/Fox.gltf');
 
-  return <></>;
+  return (
+    <>
+      <primitive object={fox.scene} />
+    </>
+  );
 }
