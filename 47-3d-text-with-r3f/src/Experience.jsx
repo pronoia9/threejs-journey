@@ -1,4 +1,5 @@
-import { OrbitControls, Text3D, Center, useMatcapTexture } from '@react-three/drei';
+import { useState } from 'react';
+import { OrbitControls, Text3D, Center, useMatcapTexture, Clone } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 export default function Experience() {
@@ -7,11 +8,15 @@ export default function Experience() {
     useMatcapTexture('7877EE_D87FC5_75D9C7_1C78C0', 256),
   ];
 
+  const [donutGeometry, setDonutGeometry] = useState();
+
   return (
     <>
       <Perf position='top-left' />
 
       <OrbitControls makeDefault />
+
+      <torusGeometry ref={setDonutGeometry} args={[1, 0.6, 16, 32]} />
 
       <Center>
         <Text3D
@@ -37,11 +42,11 @@ export default function Experience() {
         return (
           <mesh
             key={`donut-#${i}`}
+            geometry={donutGeometry}
             position={[position(), position(), position()]}
             scale={scale()}
             rotation={[rotation(), rotation(), 0]}
           >
-            <torusGeometry args={[1, 0.6, 16, 32]} />
             <meshMatcapMaterial matcap={donutMatcap} />
           </mesh>
         );
