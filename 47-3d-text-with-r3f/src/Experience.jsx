@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { OrbitControls, Text3D, Center, useMatcapTexture, Clone } from '@react-three/drei';
+import { /* useState, */ useEffect } from 'react';
+import * as THREE from 'three';
+import { OrbitControls, Text3D, Center, useMatcapTexture } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 export default function Experience() {
@@ -8,8 +9,17 @@ export default function Experience() {
     useMatcapTexture('7877EE_D87FC5_75D9C7_1C78C0', 256),
   ];
 
-  const [donutGeometry, setDonutGeometry] = useState(),
-    [donutMaterial, setDonutMaterial] = useState();
+  // const [donutGeometry, setDonutGeometry] = useState(),
+  // [donutMaterial, setDonutMaterial] = useState();
+  const donutGeometry = new THREE.TorusGeometry(1, 0.6, 16, 32),
+    donutMaterial = new THREE.MeshMatcapMaterial();
+
+  useEffect(() => {
+    donutMatcap.encoding = THREE.sRGBEncoding;
+    donutMatcap.needsUpdate = true;
+    donutMaterial.matcap = donutMatcap;
+    donutMaterial.needsUpdate = true;
+  }, []);
 
   return (
     <>
@@ -17,8 +27,8 @@ export default function Experience() {
 
       <OrbitControls makeDefault />
 
-      <torusGeometry ref={setDonutGeometry} args={[1, 0.6, 16, 32]} />
-      <meshMatcapMaterial ref={setDonutMaterial} matcap={donutMatcap} />
+      {/* <torusGeometry ref={setDonutGeometry} args={[1, 0.6, 16, 32]} /> */}
+      {/* <meshMatcapMaterial ref={setDonutMaterial} matcap={donutMatcap} /> */}
 
       <Center>
         <Text3D
@@ -45,10 +55,10 @@ export default function Experience() {
           <mesh
             key={`donut-#${i}`}
             geometry={donutGeometry}
+            material={donutMaterial}
             position={[position(), position(), position()]}
             scale={scale()}
             rotation={[rotation(), rotation(), 0]}
-            material={donutMaterial}
           />
         );
       })}
