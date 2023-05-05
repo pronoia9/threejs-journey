@@ -5,7 +5,9 @@ import { OrbitControls, Text3D, Center, useMatcapTexture } from '@react-three/dr
 import { Perf } from 'r3f-perf';
 
 export default function Experience() {
-  const donutsRef = useRef();
+  // const donutsRef = useRef();
+  const donutsArray = useRef([]);
+
   const [[textMatcap], [donutMatcap]] = [
     useMatcapTexture('CB4E88_F99AD6_F384C3_ED75B9', 256),
     useMatcapTexture('7877EE_D87FC5_75D9C7_1C78C0', 256),
@@ -25,7 +27,8 @@ export default function Experience() {
 
   // Animate donuts
   useFrame((state, delta) => {
-    for (const donut of donutsRef.current.children) donut.rotation.y += delta * 0.2;
+    // for (const donut of donutsRef.current.children) donut.rotation.y += delta * 0.2;
+    for (const donut of donutsArray.current) donut.rotation.y += delta * 0.2;
   });
 
   return (
@@ -53,24 +56,27 @@ export default function Experience() {
         </Text3D>
       </Center>
 
-      <group ref={donutsRef}>
-        {[...Array(100)].map((v, i) => {
-          const position = () => (Math.random() - 0.5) * 10;
-          const scale = () => 0.2 + Math.random() * 0.2;
-          const rotation = () => Math.random() * Math.PI;
+      {/* <group ref={donutsRef}> */}
+      {[...Array(100)].map((v, i) => {
+        const position = () => (Math.random() - 0.5) * 10;
+        const scale = () => 0.2 + Math.random() * 0.2;
+        const rotation = () => Math.random() * Math.PI;
 
-          return (
-            <mesh
-              key={`donut-#${i}`}
-              geometry={donutGeometry}
-              material={donutMaterial}
-              position={[position(), position(), position()]}
-              scale={scale()}
-              rotation={[rotation(), rotation(), 0]}
-            />
-          );
-        })}
-      </group>
+        return (
+          <mesh
+            ref={(element) => {
+              donutsArray.current[i] = element;
+            }}
+            key={`donut-#${i}`}
+            geometry={donutGeometry}
+            material={donutMaterial}
+            position={[position(), position(), position()]}
+            scale={scale()}
+            rotation={[rotation(), rotation(), 0]}
+          />
+        );
+      })}
+      {/* </group> */}
     </>
   );
 }
