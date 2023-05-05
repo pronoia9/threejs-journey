@@ -9,11 +9,11 @@ export default function Experience() {
     useMatcapTexture('7877EE_D87FC5_75D9C7_1C78C0', 256),
   ];
 
-  // const [donutGeometry, setDonutGeometry] = useState(),
-  // [donutMaterial, setDonutMaterial] = useState();
+  // const [donutGeometry, setDonutGeometry] = useState(), [donutMaterial, setDonutMaterial] = useState();
   const donutGeometry = new THREE.TorusGeometry(1, 0.6, 16, 32),
     donutMaterial = new THREE.MeshMatcapMaterial();
 
+  // Update donut materials
   useEffect(() => {
     donutMatcap.encoding = THREE.sRGBEncoding;
     donutMatcap.needsUpdate = true;
