@@ -8,7 +8,8 @@ export default function Experience() {
     useMatcapTexture('7877EE_D87FC5_75D9C7_1C78C0', 256),
   ];
 
-  const [donutGeometry, setDonutGeometry] = useState();
+  const [donutGeometry, setDonutGeometry] = useState(),
+    [donutMaterial, setDonutMaterial] = useState();
 
   return (
     <>
@@ -17,6 +18,7 @@ export default function Experience() {
       <OrbitControls makeDefault />
 
       <torusGeometry ref={setDonutGeometry} args={[1, 0.6, 16, 32]} />
+      <meshMatcapMaterial ref={setDonutMaterial} matcap={donutMatcap} />
 
       <Center>
         <Text3D
@@ -46,9 +48,8 @@ export default function Experience() {
             position={[position(), position(), position()]}
             scale={scale()}
             rotation={[rotation(), rotation(), 0]}
-          >
-            <meshMatcapMaterial matcap={donutMatcap} />
-          </mesh>
+            material={donutMaterial}
+          />
         );
       })}
     </>
