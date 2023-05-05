@@ -29,10 +29,23 @@ export default function Experience() {
         </Text3D>
       </Center>
 
-      <mesh>
-        <torusGeometry args={[1, 0.6, 16, 32]} />
-        <meshMatcapMaterial matcap={donutMatcap} />
-      </mesh>
+      {[...Array(100)].map((v, i) => {
+        const position = () => (Math.random() - 0.5) * 10;
+        const scale = () => 0.2 + Math.random() * 0.2;
+        const rotation = () => Math.random() * Math.PI;
+
+        return (
+          <mesh
+            key={`donut-#${i}`}
+            position={[position(), position(), position()]}
+            scale={scale()}
+            rotation={[rotation(), rotation(), 0]}
+          >
+            <torusGeometry args={[1, 0.6, 16, 32]} />
+            <meshMatcapMaterial matcap={donutMatcap} />
+          </mesh>
+        );
+      })}
     </>
   );
 }
