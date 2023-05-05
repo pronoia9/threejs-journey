@@ -2,7 +2,10 @@ import { OrbitControls, Text3D, Center, useMatcapTexture } from '@react-three/dr
 import { Perf } from 'r3f-perf';
 
 export default function Experience() {
-  const [textMatcap] = useMatcapTexture('7B5254_E9DCC7_B19986_C8AC91', 256);
+  const [[textMatcap], [donutMatcap]] = [
+    useMatcapTexture('CB4E88_F99AD6_F384C3_ED75B9', 256),
+    useMatcapTexture('7877EE_D87FC5_75D9C7_1C78C0', 256),
+  ];
 
   return (
     <>
@@ -25,6 +28,11 @@ export default function Experience() {
           <meshMatcapMaterial matcap={textMatcap} />
         </Text3D>
       </Center>
+
+      <mesh>
+        <torusGeometry args={[1, 0.6, 16, 32]} />
+        <meshMatcapMaterial matcap={donutMatcap} />
+      </mesh>
     </>
   );
 }
