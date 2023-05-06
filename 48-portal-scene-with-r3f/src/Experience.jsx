@@ -1,4 +1,4 @@
-import { OrbitControls, useGLTF, useTexture, Center } from '@react-three/drei';
+import { OrbitControls, useGLTF, useTexture, Center, Sparkles } from '@react-three/drei';
 
 export default function Experience() {
   const { nodes } = useGLTF('./model/portal.glb'),
@@ -28,6 +28,8 @@ export default function Experience() {
           position={nodes.portalLight.position}
           rotation={nodes.portalLight.rotation}
         ></mesh>
+        {/* Fireflies */}
+        <Sparkles size={6} scale={[4, 2, 4]} position={[0, 1, 0]} speed={0.2} count={40} />
       </Center>
     </>
   );
