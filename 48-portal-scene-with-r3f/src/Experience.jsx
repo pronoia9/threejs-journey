@@ -1,4 +1,5 @@
-import { extend } from '@react-three/fiber';
+import { useRef } from 'react';
+import { extend, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, useTexture, Center, Sparkles, shaderMaterial } from '@react-three/drei';
 import { Color } from 'three';
 
@@ -14,8 +15,13 @@ extend({
 });
 
 export default function Experience() {
+  const portalMaterialRef = useRef();
   const { nodes } = useGLTF('./model/portal.glb'),
     bakedTexture = useTexture('/model/baked.jpg');
+
+  useFrame((state, delta) => {
+    portalMaterialRef.current.uTime += delta;
+  });
 
   return (
     <>
@@ -37,7 +43,7 @@ export default function Experience() {
         </mesh>
         {/* Portal */}
         <mesh geometry={nodes.portalLight.geometry} position={nodes.portalLight.position} rotation={nodes.portalLight.rotation}>
-          <portalMaterial />
+          <portalMaterial ref={portalMaterialRef} />
         </mesh>
         {/* Fireflies */}
         <Sparkles size={6} scale={[4, 2, 4]} position={[0, 1, 0]} speed={0.2} count={40} />
