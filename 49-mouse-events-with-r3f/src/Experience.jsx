@@ -10,8 +10,9 @@ export default function Experience() {
   });
 
   const handleClick = (e) => {
-    console.log('click happened', e.object.material.color);
-    e.object.material.color.set(`hsl(${Math.random() * 360}, 100%, 75%)`);
+    console.log(e);
+    e.stopPropagation(); // occlusion
+    e.eventObject.material.color.set(`hsl(${Math.random() * 360}, 100%, 75%)`);
   };
 
   return (
