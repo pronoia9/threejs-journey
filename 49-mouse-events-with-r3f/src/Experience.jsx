@@ -1,9 +1,11 @@
-import { useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
 import { useRef } from 'react';
+import { useFrame, useThree } from '@react-three/fiber'; // TODO check useThree to do the hovering for the Canvas
+import { OrbitControls, useCursor, useGLTF } from '@react-three/drei'; // TODO check useCursor helper instead of hover funcs
 
 export default function Experience() {
   const cube = useRef();
+  const burger = useGLTF('./hamburger.glb');
+  console.log(burger);
 
   useFrame((state, delta) => {
     cube.current.rotation.y += delta * 0.2;
@@ -20,7 +22,6 @@ export default function Experience() {
   };
 
   const handleClick = (e) => {
-    console.log(e);
     e.stopPropagation(); // occlusion
     e.eventObject.material.color.set(`hsl(${Math.random() * 360}, 100%, 75%)`);
   };
@@ -41,6 +42,8 @@ export default function Experience() {
         <boxGeometry />
         <meshStandardMaterial color='mediumpurple' />
       </mesh>
+
+      <primitive object={burger.scene} scale={0.25} position={[0, 0.5, 0]} />
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry />
