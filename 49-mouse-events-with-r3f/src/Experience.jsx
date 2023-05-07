@@ -1,4 +1,4 @@
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useRef } from 'react';
 
@@ -8,6 +8,16 @@ export default function Experience() {
   useFrame((state, delta) => {
     cube.current.rotation.y += delta * 0.2;
   });
+
+  const handleHover = (e) => {
+    e.stopPropagation();
+    document.body.style.cursor = 'pointer';
+  };
+
+  const handleHoverLeave = (e) => {
+    e.stopPropagation();
+    document.body.style.cursor = 'default';
+  };
 
   const handleClick = (e) => {
     console.log(e);
@@ -22,12 +32,12 @@ export default function Experience() {
       <directionalLight position={[1, 2, 3]} intensity={1.5} />
       <ambientLight intensity={0.5} />
 
-      <mesh position-x={-2} onClick={handleClick}>
+      <mesh position-x={-2} onPointerEnter={handleHover} onPointerLeave={handleHoverLeave} onClick={handleClick}>
         <sphereGeometry />
         <meshStandardMaterial color='orange' />
       </mesh>
 
-      <mesh ref={cube} position-x={2} scale={1.5} onClick={handleClick}>
+      <mesh ref={cube} position-x={2} scale={1.5} onPointerEnter={handleHover} onPointerLeave={handleHoverLeave} onClick={handleClick}>
         <boxGeometry />
         <meshStandardMaterial color='mediumpurple' />
       </mesh>
