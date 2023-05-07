@@ -9,6 +9,11 @@ export default function Experience() {
     cube.current.rotation.y += delta * 0.2;
   });
 
+  const handleClick = (e) => {
+    console.log('click happened', e.object.material.color);
+    e.object.material.color.set(`hsl(${Math.random() * 360}, 100%, 75%)`);
+  };
+
   return (
     <>
       <OrbitControls makeDefault />
@@ -16,12 +21,12 @@ export default function Experience() {
       <directionalLight position={[1, 2, 3]} intensity={1.5} />
       <ambientLight intensity={0.5} />
 
-      <mesh position-x={-2}>
+      <mesh position-x={-2} onClick={handleClick}>
         <sphereGeometry />
         <meshStandardMaterial color='orange' />
       </mesh>
 
-      <mesh ref={cube} position-x={2} scale={1.5}>
+      <mesh ref={cube} position-x={2} scale={1.5} onClick={handleClick}>
         <boxGeometry />
         <meshStandardMaterial color='mediumpurple' />
       </mesh>
