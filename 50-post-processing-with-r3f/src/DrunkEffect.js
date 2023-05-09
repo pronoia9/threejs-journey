@@ -2,7 +2,7 @@ import { Effect } from 'postprocessing';
 
 const fragmentShader = /* glsl */ `
   void mainUv(inout vec2 uv) {
-    uv.y += sin(uv.x);
+    uv.y += sin(uv.x * 10.0) * 0.1;
   }
 
   void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
@@ -13,7 +13,12 @@ const fragmentShader = /* glsl */ `
 `;
 
 export default class DrunkEffect extends Effect {
-  constructor(props) {
-    super('DrunkEffect', fragmentShader, props);
+  constructor({ frequency, amplitude }) {
+    super('DrunkEffect', fragmentShader, {
+      uniforms: new Map([
+        ['frequency', { value: frequency }],
+        ['amplitude', { value: amplitude }],
+      ]),
+    });
   }
 }
