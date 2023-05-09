@@ -2,8 +2,11 @@ import { Uniform } from 'three';
 import { Effect } from 'postprocessing';
 
 const fragmentShader = /* glsl */ `
+  uniform float frequency;
+  uniform float amplitude;
+
   void mainUv(inout vec2 uv) {
-    uv.y += sin(uv.x * 10.0) * 0.1;
+    uv.y += sin(uv.x * frequency) * amplitude;
   }
 
   void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
