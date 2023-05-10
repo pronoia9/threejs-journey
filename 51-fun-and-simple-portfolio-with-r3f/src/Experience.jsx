@@ -1,4 +1,4 @@
-import { OrbitControls, useGLTF, Environment, Float } from '@react-three/drei';
+import { useGLTF, Environment, Float, PresentationControls } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Perf } from 'r3f-perf';
 
@@ -18,11 +18,11 @@ export default function Experience() {
       <Environment preset='city' />
       <color args={['#2F2953']} attach='background' />
 
-      <OrbitControls makeDefault />
-
-      <Float rotationIntensity={0.4}>
-        <primitive object={pc.scene} scale={scale} position={position} rotation={rotation} />
-      </Float>
+      <PresentationControls global>
+        <Float rotationIntensity={0.4}>
+          <primitive object={pc.scene} scale={scale} position={position} rotation={rotation} />
+        </Float>
+      </PresentationControls>
     </>
   );
 }
