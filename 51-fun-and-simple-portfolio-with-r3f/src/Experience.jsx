@@ -1,10 +1,9 @@
-import { OrbitControls, useGLTF, Environment } from '@react-three/drei';
+import { OrbitControls, useGLTF, Environment, Float } from '@react-three/drei';
 import { useControls } from 'leva';
 
 export default function Experience() {
   const pc = useGLTF('./Desk.gltf');
   // console.log(pc);
-
   const { scale, position, rotation } = useControls('model', {
     scale: { value: 0.25 },
     position: { value: [0, 0, 0] },
@@ -18,7 +17,9 @@ export default function Experience() {
 
       <OrbitControls makeDefault />
 
-      <primitive object={pc.scene} scale={scale} position={position} rotation={rotation} />
+      <Float rotationIntensity={0.4}>
+        <primitive object={pc.scene} scale={scale} position={position} rotation={rotation} />
+      </Float>
     </>
   );
 }
