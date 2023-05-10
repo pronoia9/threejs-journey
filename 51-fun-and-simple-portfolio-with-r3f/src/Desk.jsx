@@ -12,11 +12,12 @@ export function Desk(props) {
       {/* Lights */}
       <directionalLight intensity={108702.83 / 50000} color='#31abff' position={[-0.17, 2.91, -3.4]} rotation={[Math.PI / 2, 0, -1.13]} castShadow />
       <spotLight intensity={81527.12 / 50000} color='#FFC47C' position={[-6.25, 3.26, -0.28]} rotation={[Math.PI / 2, 0, -1.99]} castShadow />
+      {/* <rectAreaLight width={2.5} height={1.65} intensity={5} color='#ff6900' position={[-0.27, 4.75, -0.14]} rotation={[0, Math.PI, 0]} /> */}
+      {/* <rectAreaLight width={0.8} height={0.5} intensity={5} color='#ff69ff' position={[5.55, 1.09, 0.5]} rotation={[0.02, -0.51 + Math.PI, 0.01]} /> */}
       {/* iframes */}
       <Html transform wrapperClass='htmlMonitor' distanceFactor={1.5} position={[-0.27, 4.75, -0.14]} scale={1.45}>
         <iframe src='https://pronoia9.github.io/portfolio/' />
       </Html>
-
       <Html transform wrapperClass='htmlMacbook' distanceFactor={1.5} position={[5.55, 1.09, 0.5]} rotation={[0.02, -0.51, 0.01]} scale={0.63}>
         {/* rotation={[-1.56, -0.01, -0.51]} */}
         <iframe src='https://portfolio-threejs-seven.vercel.app' />
