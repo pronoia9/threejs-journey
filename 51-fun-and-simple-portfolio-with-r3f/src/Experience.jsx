@@ -37,7 +37,7 @@ export default function Experience() {
         </Float>
       </PresentationControls>
 
-      <ContactShadows position={[0, -1.4, 0]} />
+      <ContactShadows position={[0, -1.4, 0]} blur={2.4} />
     </>
   );
 }
