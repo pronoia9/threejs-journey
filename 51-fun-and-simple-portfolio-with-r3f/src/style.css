@@ -12,3 +12,19 @@ body,
 canvas {
   touch-action: none;
 }
+
+.htmlMonitor iframe {
+  width: 1183.3px;
+  height: 670px;
+  border: none;
+  border-radius: 1px;
+  background: '#fff';
+}
+
+.htmlMacbook iframe {
+  width: 1180px;
+  height: 765px;
+  border: none;
+  border-radius: 1px;
+  background: '#fff';
+}
