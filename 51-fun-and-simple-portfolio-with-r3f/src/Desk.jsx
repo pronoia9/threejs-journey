@@ -19,7 +19,7 @@ export function Desk(props) {
 
       <Html transform wrapperClass='htmlMacbook' distanceFactor={1.5} position={[5.55, 1.09, 0.5]} rotation={[0.02, -0.51, 0.01]} scale={0.63}>
         {/* rotation={[-1.56, -0.01, -0.51]} */}
-        <iframe src='https://codex-kappa-drab.vercel.app' />
+        <iframe src='https://portfolio-threejs-seven.vercel.app' />
       </Html>
       {/* Objects */}
       <primitive object={scene} />
