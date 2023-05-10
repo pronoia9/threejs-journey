@@ -25,7 +25,7 @@ export default function Experience() {
     <>
       <Perf position='top-left' />
 
-      <Environment preset='lobby' />
+      {/* <Environment preset='lobby' /> */}
       {/* sunset, dawn, night, warehouse, forest, apartment, studio, city, park, lobby */}
 
       <color args={['#2F2953']} attach='background' />
