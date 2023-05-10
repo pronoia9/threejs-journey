@@ -11,13 +11,13 @@ export default function Experience() {
     rotation: { value: [-0.1, -0.45, 0] },
   });
 
+  /* sunset, dawn, night, warehouse, forest, apartment, studio, city, park, lobby */
+
   return (
     <>
       <Perf position='top-left' />
-
-      <Environment preset='night' />
+      <Environment preset='lobby' />
       <color args={['#2F2953']} attach='background' />
-
       <PresentationControls global rotation={[0.13, 0.1, 0]} polar={[-0.4, 0.2]} azimuth={[-1, 0.75]}>
         <Float rotationIntensity={0.4}>
           <primitive object={pc.scene} scale={scale} position={position} rotation={rotation} />
