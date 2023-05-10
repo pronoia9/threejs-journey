@@ -8,3 +8,7 @@ body,
   height: 100%;
   background: black;
 }
+
+canvas {
+  touch-action: none;
+}
