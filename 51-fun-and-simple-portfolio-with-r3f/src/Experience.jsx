@@ -1,10 +1,10 @@
-import { useGLTF, Environment, Float, PresentationControls } from '@react-three/drei';
+import { Environment, Float, PresentationControls, ContactShadows } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Perf } from 'r3f-perf';
 
-export default function Experience() {
-  const pc = useGLTF('./Desk.gltf');
+import { Desk } from './Desk';
 
+export default function Experience() {
   // Scene
   const { scale, position, rotation } = useControls('model', {
     scale: { value: 0.3 },
@@ -24,14 +24,20 @@ export default function Experience() {
   return (
     <>
       <Perf position='top-left' />
+
       <Environment preset='lobby' />
       {/* sunset, dawn, night, warehouse, forest, apartment, studio, city, park, lobby */}
+
       <color args={['#2F2953']} attach='background' />
+
       <PresentationControls global rotation={[0.13, 0.1, 0]} polar={polar} azimuth={azimuth} config={{ mass, tension }} snap={snap}>
         <Float rotationIntensity={0.4}>
-          <primitive object={pc.scene} scale={scale} position={position} rotation={rotation} />
+          {/* <primitive object={pc.scene} scale={scale} position={position} rotation={rotation} castShadow /> */}
+          <Desk scale={scale} position={position} rotation={rotation} />
         </Float>
       </PresentationControls>
+
+      <ContactShadows position={[0, -1.4, 0]} />
     </>
   );
 }
