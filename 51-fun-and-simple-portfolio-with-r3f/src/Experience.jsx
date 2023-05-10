@@ -6,9 +6,9 @@ export default function Experience() {
   const pc = useGLTF('./Desk.gltf');
   // console.log(pc);
   const { scale, position, rotation } = useControls('model', {
-    scale: { value: 0.25 },
+    scale: { value: 0.3 },
     position: { value: [0, -0.5, 0] },
-    rotation: { value: [0, 0, 0] },
+    rotation: { value: [-0.1, -0.45, 0] },
   });
 
   return (
