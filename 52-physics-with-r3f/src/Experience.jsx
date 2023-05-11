@@ -92,7 +92,7 @@ export default function Experience() {
           </mesh>
         </RigidBody>
 
-        <RigidBody ref={twisterRef} position={[0, -0.8, 0]} friction={0} type='kinematicPosition'>
+        <RigidBody ref={twisterRef} type='kinematicPosition' position={[0, -0.8, 0]} friction={0}>
           <mesh castShadow scale={[0.4, 0.4, 3]}>
             <boxGeometry />
             <meshStandardMaterial color='#ff0000' />
@@ -102,6 +102,14 @@ export default function Experience() {
         <RigidBody position={[0, 4, 0]} colliders={false}>
           <CylinderCollider args={[0.5, 1.25]} />
           <primitive object={burger.scene} scale={0.25} />
+        </RigidBody>
+
+        {/* Invisible Walls */}
+        <RigidBody type='fixed'>
+          <CuboidCollider args={[5, 2, 0.5]} position={[0, 1, 5.5]} />
+          <CuboidCollider args={[5, 2, 0.5]} position={[0, 1, -5.5]} />
+          <CuboidCollider args={[0.5, 2, 5]} position={[5.5, 1, 0]} />
+          <CuboidCollider args={[0.5, 2, 5]} position={[-5.5, 1, 0]} />
         </RigidBody>
       </Physics>
     </>
