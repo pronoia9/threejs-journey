@@ -1,15 +1,17 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import { Physics, RigidBody, Debug, CuboidCollider, BallCollider, CylinderCollider } from '@react-three/rapier';
-import { Euler, Quaternion } from 'three';
+import { Euler, Quaternion, Matrix4, Vector3 } from 'three';
 import { Perf } from 'r3f-perf';
 
 export default function Experience() {
   const [hitSound, setHitSound] = useState(() => new Audio('./hit.mp3'));
   const cubeRef = useRef(),
-    twisterRef = useRef();
+    twisterRef = useRef(),
+    cubesRef = useRef();
   const burger = useGLTF('./hamburger.glb');
+  const cubesCount = 3;
 
   const jump = (e, ref) => {
     ref.current.applyImpulse({ x: 0, y: 5 * ref.current.mass(), z: 0 });
@@ -35,6 +37,14 @@ export default function Experience() {
     // hitSound.volume = Math.random();
     // hitSound.play();
   };
+
+  useEffect(() => {
+    for (let i = 0; i < cubesCount; i++) {
+      const matrix = new Matrix4();
+      matrix.compose(new Vector3(i * 2, 0, 0), new Quaternion(), new Vector3(1, 1, 1));
+      cubesRef.current.setMatrixAt(i, matrix);
+    }
+  }, []);
 
   return (
     <>
@@ -111,6 +121,11 @@ export default function Experience() {
           <CuboidCollider args={[0.5, 2, 5]} position={[5.5, 1, 0]} />
           <CuboidCollider args={[0.5, 2, 5]} position={[-5.5, 1, 0]} />
         </RigidBody>
+
+        <instancedMesh ref={cubesRef} args={[null, null, cubesCount]} castShadow>
+          <boxGeometry />
+          <meshNormalMaterial />
+        </instancedMesh>
       </Physics>
     </>
   );
