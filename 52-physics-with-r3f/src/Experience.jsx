@@ -8,6 +8,8 @@ export default function Experience() {
 
   const jump = (e, ref) => {
     ref.current.applyImpulse({ x: 0, y: 5, z: 0 });
+    // ref.current.applyTorqueImpulse({ x: 0, y: 1, z: 0 });
+    ref.current.applyTorqueImpulse({ x: Math.random() - 0.5, y: Math.random() - 0.5, z: Math.random() - 0.5 });
   };
 
   return (
