@@ -17,10 +17,15 @@ export default function Experience() {
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
-    const eulerRotation = new Euler(0, time * 3, 0);
-    const quaternionRotation = new Quaternion();
+    const eulerRotation = new Euler(0, time * 3, 0),
+      quaternionRotation = new Quaternion();
     quaternionRotation.setFromEuler(eulerRotation);
     twisterRef.current.setNextKinematicRotation(quaternionRotation);
+
+    const angle = time * 0.5;
+    const x = Math.cos(angle) * 2,
+      z = Math.sin(angle) * 2;
+    twisterRef.current.setNextKinematicTranslation({ x, y: -0.8, z });
   });
 
   return (
