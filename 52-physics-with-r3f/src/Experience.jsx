@@ -23,11 +23,19 @@ export default function Experience() {
 
       <Physics gravity={[0, -9.08, 0]}>
         <Debug />
-        <RigidBody colliders='ball' gravityScale={0.2}>
+
+        <RigidBody colliders='ball' gravityScale={0.9}>
           {/* <mesh castShadow position={[0, 4, 0]}> */}
           <mesh castShadow position={[-1.5, 2, 0]}>
             <sphereGeometry />
             <meshStandardMaterial color='orange' />
+          </mesh>
+        </RigidBody>
+
+        <RigidBody ref={cubeRef} gravityScale={1} restitution={0.5}>
+          <mesh castShadow position={[1.5, 2, 0]} onClick={(e) => jump(e, cubeRef)}>
+            <boxGeometry />
+            <meshStandardMaterial color='mediumpurple' />
           </mesh>
         </RigidBody>
 
@@ -41,14 +49,7 @@ export default function Experience() {
           </mesh> */}
         {/* </RigidBody> */}
 
-        <RigidBody ref={cubeRef}>
-          <mesh castShadow position={[1.5, 2, 0]} onClick={(e) => jump(e, cubeRef)}>
-            <boxGeometry />
-            <meshStandardMaterial color='mediumpurple' />
-          </mesh>
-        </RigidBody>
-
-        <RigidBody type='fixed'>
+        <RigidBody type='fixed' restitution={0.1}>
           <mesh receiveShadow position-y={-1.25}>
             <boxGeometry args={[10, 0.5, 10]} />
             <meshStandardMaterial color='greenyellow' />
