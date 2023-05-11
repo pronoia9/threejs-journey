@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
-import { Physics, RigidBody, Debug, CuboidCollider, BallCollider, CylinderCollider } from '@react-three/rapier';
+import { Physics, RigidBody, Debug, CuboidCollider, BallCollider, CylinderCollider, InstancedRigidBodies } from '@react-three/rapier';
 import { Euler, Quaternion, Matrix4, Vector3 } from 'three';
 import { Perf } from 'r3f-perf';
 
@@ -11,7 +11,19 @@ export default function Experience() {
     twisterRef = useRef(),
     cubesRef = useRef();
   const burger = useGLTF('./hamburger.glb');
-  const cubesCount = 3;
+  const cubesCount = 300;
+  const cubesTransforms = useMemo(() => {
+    const positions = [];
+    const rotations = [];
+    const scales = [];
+    for (let i = 0; i < cubesCount; i++) {
+      positions.push([(Math.random() - 0.5) * 8, 6 + i * 0.2, (Math.random() - 0.5) * 8]);
+      rotations.push([Math.random(), Math.random(), Math.random()]);
+      const scale = 0.2 + Math.random() * 0.8;
+      scales.push([scale, scale, scale]);
+    }
+    return { positions, rotations, scales };
+  }, []);
 
   const jump = (e, ref) => {
     ref.current.applyImpulse({ x: 0, y: 5 * ref.current.mass(), z: 0 });
@@ -56,7 +68,7 @@ export default function Experience() {
       <ambientLight intensity={0.5} />
 
       <Physics gravity={[0, -9.08, 0]}>
-        <Debug />
+        {/* <Debug /> */}
 
         <RigidBody colliders='ball' gravityScale={0.9}>
           {/* <mesh castShadow position={[0, 4, 0]}> */}
@@ -122,10 +134,12 @@ export default function Experience() {
           <CuboidCollider args={[0.5, 2, 5]} position={[-5.5, 1, 0]} />
         </RigidBody>
 
-        <instancedMesh ref={cubesRef} args={[null, null, cubesCount]} castShadow>
-          <boxGeometry />
-          <meshNormalMaterial />
-        </instancedMesh>
+        <InstancedRigidBodies positions={cubesTransforms.positions} rotations={cubesTransforms.rotations} scale={cubesTransforms.scales}>
+          <instancedMesh ref={cubesRef} args={[null, null, cubesCount]} castShadow>
+            <boxGeometry />
+            <meshNormalMaterial />
+          </instancedMesh>
+        </InstancedRigidBodies>
       </Physics>
     </>
   );
