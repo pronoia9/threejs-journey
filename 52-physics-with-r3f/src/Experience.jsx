@@ -1,16 +1,27 @@
 import { useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Physics, RigidBody, Debug, CuboidCollider, BallCollider } from '@react-three/rapier';
+import { Euler, Quaternion } from 'three';
 import { Perf } from 'r3f-perf';
 
 export default function Experience() {
-  const cubeRef = useRef();
+  const cubeRef = useRef(),
+    twisterRef = useRef();
 
   const jump = (e, ref) => {
     ref.current.applyImpulse({ x: 0, y: 5 * ref.current.mass(), z: 0 });
     // ref.current.applyTorqueImpulse({ x: 0, y: 1, z: 0 });
     ref.current.applyTorqueImpulse({ x: Math.random() - 0.5, y: Math.random() - 0.5, z: Math.random() - 0.5 });
   };
+
+  useFrame((state) => {
+    const time = state.clock.getElapsedTime();
+    const eulerRotation = new Euler(0, time * 3, 0);
+    const quaternionRotation = new Quaternion();
+    quaternionRotation.setFromEuler(eulerRotation);
+    twisterRef.current.setNextKinematicRotation(quaternionRotation);
+  });
 
   return (
     <>
@@ -54,6 +65,13 @@ export default function Experience() {
           <mesh receiveShadow position-y={-1.25}>
             <boxGeometry args={[10, 0.5, 10]} />
             <meshStandardMaterial color='greenyellow' />
+          </mesh>
+        </RigidBody>
+
+        <RigidBody ref={twisterRef} position={[0, -0.8, 0]} friction={0} type='kinematicPosition'>
+          <mesh castShadow scale={[0.4, 0.4, 3]}>
+            <boxGeometry />
+            <meshStandardMaterial color='#ff0000' />
           </mesh>
         </RigidBody>
       </Physics>
