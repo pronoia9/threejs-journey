@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, useGLTF } from '@react-three/drei';
 import { Physics, RigidBody, Debug, CuboidCollider, BallCollider } from '@react-three/rapier';
 import { Euler, Quaternion } from 'three';
 import { Perf } from 'r3f-perf';
@@ -9,6 +9,7 @@ export default function Experience() {
   const [hitSound, setHitSound] = useState(() => new Audio('./hit.mp3'));
   const cubeRef = useRef(),
     twisterRef = useRef();
+  const burger = useGLTF('./hamburger.glb');
 
   const jump = (e, ref) => {
     ref.current.applyImpulse({ x: 0, y: 5 * ref.current.mass(), z: 0 });
@@ -96,6 +97,10 @@ export default function Experience() {
             <boxGeometry />
             <meshStandardMaterial color='#ff0000' />
           </mesh>
+        </RigidBody>
+
+        <RigidBody position={[0, 4, 0]} scale={0.25}>
+          <primitive object={burger.scene} />
         </RigidBody>
       </Physics>
     </>
