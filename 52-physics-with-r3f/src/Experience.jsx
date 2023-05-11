@@ -7,7 +7,7 @@ export default function Experience() {
   const cubeRef = useRef();
 
   const jump = (e, ref) => {
-    ref.current.applyImpulse({ x: 0, y: 5, z: 0 });
+    ref.current.applyImpulse({ x: 0, y: 5 * ref.current.mass(), z: 0 });
     // ref.current.applyTorqueImpulse({ x: 0, y: 1, z: 0 });
     ref.current.applyTorqueImpulse({ x: Math.random() - 0.5, y: Math.random() - 0.5, z: Math.random() - 0.5 });
   };
@@ -32,11 +32,12 @@ export default function Experience() {
           </mesh>
         </RigidBody>
 
-        <RigidBody ref={cubeRef} gravityScale={1} restitution={0} friction={0.7}>
-          <mesh castShadow position={[1.5, 2, 0]} onClick={(e) => jump(e, cubeRef)}>
+        <RigidBody ref={cubeRef} position={[1.5, 2, 0]} gravityScale={1} restitution={0} friction={0.7} colliders={false}>
+          <mesh castShadow onClick={(e) => jump(e, cubeRef)}>
             <boxGeometry />
             <meshStandardMaterial color='mediumpurple' />
           </mesh>
+          <CuboidCollider args={[0.5, 0.5, 0.5]} mass={2} />
         </RigidBody>
 
         {/* <RigidBody colliders={false} position={[0, 1, 0]} rotation={[Math.PI * 0.5, 0, 0]}> */}
