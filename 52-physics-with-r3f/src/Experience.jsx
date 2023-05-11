@@ -30,9 +30,9 @@ export default function Experience() {
   });
 
   const collisionEnter = () => {
-    hitSound.currentTime = 0;
-    hitSound.volume = Math.random();
-    hitSound.play();
+    // hitSound.currentTime = 0;
+    // hitSound.volume = Math.random();
+    // hitSound.play();
   };
 
   return (
@@ -63,6 +63,9 @@ export default function Experience() {
           friction={0.7}
           colliders={false}
           onCollisionEnter={collisionEnter}
+          // onCollisionExit={() => { console.log('collision exit'); }}
+          // onSleep={() => {  console.log('sleep'); }}
+          // onWake={() => {  console.log('wake'); }}
         >
           <mesh castShadow onClick={(e) => jump(e, cubeRef)}>
             <boxGeometry />
