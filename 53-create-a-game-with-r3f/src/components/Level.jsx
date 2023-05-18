@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { BlockStart, BlockSpinner, BlockLimbo, BlockAxe, BlockEnd } from './';
+import { BlockStart, BlockSpinner, BlockLimbo, BlockAxe, BlockEnd, Bounds } from './';
 import { geometries, materials } from './utils';
 
 const { box } = geometries;
@@ -16,6 +16,7 @@ export default function Level({ count = 5, types = [BlockSpinner, BlockLimbo, Bl
         <Block key={`block-#${index}`} position={[0, 0, -index * 4 - 4]} />
       ))}
       <BlockEnd position={[0, 0, -count * 4 - 4]} />
+      <Bounds length={count + 2} />
     </>
   );
 }
