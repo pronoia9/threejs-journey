@@ -13,7 +13,7 @@ export default function BlockEnd({ position = [0, 0, 0], geometry = geometries.b
   return (
     <group position={position}>
       {/* Floor */}
-      <mesh geometry={geometry} position={[0, -0.05, 0]} scale={[4, 0.3, 4]} material={materials?.floor} receiveShadow />
+      <mesh geometry={geometry} position={[0, -0.05, 0]} scale={[4, 0.3, 4]} material={materials?.floor || materials} receiveShadow />
       {/* Burger */}
       <RigidBody type='fixed' colliders='hull' position={[0, 0.25, 0]} restitution={0.2} friction={0}>
         <primitive object={hamburger.scene} scale={0.2} />

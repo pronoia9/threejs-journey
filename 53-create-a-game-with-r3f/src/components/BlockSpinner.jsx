@@ -22,10 +22,10 @@ export default function BlockSpinner({ position = [0, 0, 0], geometry = geometri
   return (
     <group position={position}>
       {/* Floor */}
-      <mesh geometry={geometry} position={[0, -0.1, 0]} scale={[4, 0.2, 4]} material={materials?.floor} receiveShadow />
+      <mesh geometry={geometry} position={[0, -0.1, 0]} scale={[4, 0.2, 4]} material={materials?.floor || materials} receiveShadow />
       {/* Obstacle */}
       <RigidBody ref={obstacleRef} type='kinematicPosition' position={[0, 0.3, 0]} restitution={0.2} friction={0}>
-        <mesh geometry={geometry} position={[0, 0, 0]} scale={[3.5, 0.3, 0.3]} material={materials?.obstacle} castShadow receiveShadow />
+        <mesh geometry={geometry} position={[0, 0, 0]} scale={[3.5, 0.3, 0.3]} material={materials?.obstacle || materials} castShadow receiveShadow />
       </RigidBody>
     </group>
   );
