@@ -17,7 +17,7 @@ export default function Level() {
 function BlockStart({ position = [0, 0, 0], scale, material }) {
   return (
     <group position={position}>
-      <mesh geometry={boxGeometry} position={[0, -0.1, 0]} scale={scale} receiveShadow material={material} />
+      <mesh geometry={boxGeometry} position={[0, -0.1, 0]} scale={scale} material={material} receiveShadow />
     </group>
   );
 }
