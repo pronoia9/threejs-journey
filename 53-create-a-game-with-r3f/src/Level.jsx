@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { BoxGeometry, ColorManagement, Euler, MeshStandardMaterial, Quaternion } from 'three';
 import { useFrame } from '@react-three/fiber';
+import { useGLTF } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
 
 // Fix Colors
@@ -105,10 +106,16 @@ function BlockAxe({ position = [0, 0, 0] }) {
 }
 
 function BlockEnd({ position = [0, 0, 0] }) {
+  const hamburger = useGLTF('/hamburger.glb');
+
   return (
     <group position={position}>
       {/* Floor */}
       <mesh geometry={boxGeometry} position={[0, -0.05, 0]} scale={[4, 0.3, 4]} material={floor1Material} receiveShadow />
+      {/* Burger */}
+      <RigidBody type='fixed' colliders='hull' position={[0, 0.25, 0]} restitution={0.2} friction={0}>
+        <primitive object={hamburger.scene} scale={0.2} />
+      </RigidBody>
     </group>
   );
 }
