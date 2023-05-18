@@ -15,10 +15,11 @@ const wallMaterial = new MeshStandardMaterial({ color: 'slategrey' });
 export default function Level() {
   return (
     <>
-      <BlockStart position={[0, 0, 12]} />
-      <BlockSpinner position={[0, 0, 8]} />
-      <BlockLimbo position={[0, 0, 4]} />
-      <BlockAxe position={[0, 0, 0]} />
+      <BlockStart position={[0, 0, 16]} />
+      <BlockSpinner position={[0, 0, 12]} />
+      <BlockLimbo position={[0, 0, 8]} />
+      <BlockAxe position={[0, 0, 4]} />
+      <BlockEnd position={[0, 0, 0]} />
     </>
   );
 }
@@ -99,6 +100,15 @@ function BlockAxe({ position = [0, 0, 0] }) {
       <RigidBody ref={obstacleRef} type='kinematicPosition' position={[0, 0.3, 0]} restitution={0.2} friction={0}>
         <mesh geometry={boxGeometry} position={[0, 0, 0]} scale={[1.5, 1.5, 0.3]} material={obstacleMaterial} castShadow receiveShadow />
       </RigidBody>
+    </group>
+  );
+}
+
+function BlockEnd({ position = [0, 0, 0] }) {
+  return (
+    <group position={position}>
+      {/* Floor */}
+      <mesh geometry={boxGeometry} position={[0, -0.1, 0]} scale={[4, 0.2, 4]} material={floor1Material} receiveShadow />
     </group>
   );
 }
