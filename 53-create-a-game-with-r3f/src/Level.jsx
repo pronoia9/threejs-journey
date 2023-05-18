@@ -107,6 +107,9 @@ function BlockAxe({ position = [0, 0, 0] }) {
 
 function BlockEnd({ position = [0, 0, 0] }) {
   const hamburger = useGLTF('/hamburger.glb');
+  hamburger.scene.children.forEach((child) => {
+    child.type === 'Mesh' && (child.castShadow = true);
+  });
 
   return (
     <group position={position}>
