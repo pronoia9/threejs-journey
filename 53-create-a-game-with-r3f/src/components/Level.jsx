@@ -15,6 +15,7 @@ export default function Level({ count = 5, types = [BlockSpinner, BlockLimbo, Bl
       {blocks.map((Block, index) => (
         <Block key={`block-#${index}`} position={[0, 0, -index * 4 - 4]} />
       ))}
+      <BlockEnd position={[0, 0, -count * 4 - 4]} />
     </>
   );
 }
