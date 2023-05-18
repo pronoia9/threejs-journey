@@ -1,16 +1,18 @@
 export default function Level() {
   return (
     <>
-      <BlockStart />
+      <BlockStart position={[0, 0, 0]} />
     </>
   );
 }
 
-function BlockStart() {
+function BlockStart({ position = [0, 0, 0] }) {
   return (
-    <mesh position={[0, -0.1, 0]} receiveShadow>
-      <boxGeometry args={[4, 0.2, 4]} />
-      <meshStandardMaterial color='limegreen' />
-    </mesh>
+    <group position={position}>
+      <mesh position={[0, -0.1, 0]} receiveShadow>
+        <boxGeometry args={[4, 0.2, 4]} />
+        <meshStandardMaterial color='limegreen' />
+      </mesh>
+    </group>
   );
 }
