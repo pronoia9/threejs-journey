@@ -1,10 +1,14 @@
-import { BoxGeometry, MeshStandardMaterial } from 'three';
+import { BoxGeometry, ColorManagement, MeshStandardMaterial } from 'three';
 
+// Fix Colors
+ColorManagement.legacyMode = false;
+// Materials
 const boxGeometry = new BoxGeometry(1, 1, 1);
 const floor1Material = new MeshStandardMaterial({ color: 'limegreen' });
 const floor2Material = new MeshStandardMaterial({ color: 'greenyellow' });
 const obstacleMaterial = new MeshStandardMaterial({ color: 'orangered' });
 const wallMaterial = new MeshStandardMaterial({ color: 'slategrey' });
+
 
 export default function Level() {
   return (
