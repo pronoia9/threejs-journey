@@ -1,3 +1,7 @@
+import { BoxGeometry } from 'three';
+
+const boxGeometry = new BoxGeometry(1, 1, 1);
+
 export default function Level() {
   return (
     <>
@@ -9,8 +13,7 @@ export default function Level() {
 function BlockStart({ position = [0, 0, 0] }) {
   return (
     <group position={position}>
-      <mesh position={[0, -0.1, 0]} receiveShadow>
-        <boxGeometry args={[4, 0.2, 4]} />
+      <mesh geometry={boxGeometry} position={[0, -0.1, 0]} scale={[4, 0.2, 4]} receiveShadow>
         <meshStandardMaterial color='limegreen' />
       </mesh>
     </group>
