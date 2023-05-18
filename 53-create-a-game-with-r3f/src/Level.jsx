@@ -31,7 +31,7 @@ function BlockStart({ position = [0, 0, 0] }) {
 }
 
 function BlockSpinner({ position = [0, 0, 0] }) {
-  const [speed] = useState(Math.random() + 0.2 * Math.random() < 0.5 ? -1 : 1);
+  const [spin] = useState(Math.random() + 0.2 * Math.random() < 0.5 ? -1 : 1);
   const obstacleRef = useRef();
 
   // Animation
@@ -39,7 +39,7 @@ function BlockSpinner({ position = [0, 0, 0] }) {
     const time = state.clock.getElapsedTime();
     // Rotation of the obstacle
     const rotation = new Quaternion();
-    rotation.setFromEuler(new Euler(0, time * speed, 0));
+    rotation.setFromEuler(new Euler(0, time * spin, 0));
     obstacleRef.current.setNextKinematicRotation(rotation);
   });
 
