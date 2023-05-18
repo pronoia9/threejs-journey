@@ -1,9 +1,7 @@
 import { BlockStart, BlockSpinner, BlockLimbo, BlockAxe, BlockEnd } from './';
 import { geometries, materials } from './utils';
 
-// Geometries
 const { box } = geometries;
-// Materials
 const { floor1, floor2, obstacle, wall } = materials;
 
 export default function Level({ count = 5, types = [BlockSpinner, BlockLimbo, BlockAxe] }) {
