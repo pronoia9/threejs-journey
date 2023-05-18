@@ -57,14 +57,14 @@ function BlockSpinner({ position = [0, 0, 0] }) {
 }
 
 function BlockLimbo({ position = [0, 0, 0] }) {
-  const [spin] = useState((Math.random() + 0.2) * (Math.random() < 0.5 ? -1 : 1));
+  const [offset] = useState(Math.random() * Math.PI * 2);
   const obstacleRef = useRef();
 
   // Animation
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
-    const y = Math.sin(time) + 1.15;
-    obstacleRef.current.setNextKinematicTranslation({ x: 0, y, z: 0 });
+    const y = Math.sin(time + offset) + 1.15;
+    obstacleRef.current.setNextKinematicTranslation({ x: position[0], y, z: position[2] });
   });
 
   return (
