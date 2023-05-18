@@ -31,7 +31,7 @@ function BlockStart({ position = [0, 0, 0] }) {
 }
 
 function BlockSpinner({ position = [0, 0, 0] }) {
-  const [spin] = useState(Math.random() + 0.2 * Math.random() < 0.5 ? -1 : 1);
+  const [spin] = useState((Math.random() + 0.2) * (Math.random() < 0.5 ? -1 : 1));
   const obstacleRef = useRef();
 
   // Animation
