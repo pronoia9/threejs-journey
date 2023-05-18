@@ -108,7 +108,7 @@ function BlockEnd({ position = [0, 0, 0] }) {
   return (
     <group position={position}>
       {/* Floor */}
-      <mesh geometry={boxGeometry} position={[0, -0.1, 0]} scale={[4, 0.2, 4]} material={floor1Material} receiveShadow />
+      <mesh geometry={boxGeometry} position={[0, -0.05, 0]} scale={[4, 0.3, 4]} material={floor1Material} receiveShadow />
     </group>
   );
 }
