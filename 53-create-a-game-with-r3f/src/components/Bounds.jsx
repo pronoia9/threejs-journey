@@ -25,7 +25,7 @@ export default function BlockStart({ length = 1, geometry = geometries.box, mate
       {/* End Wall */}
       <mesh geometry={geometry} position={[0, 0.75, -(length * 4) + 4 / 2]} scale={[4.6, 1.9, 0.3]} material={material || wall} receiveShadow />
       {/* Floor */}
-      <CuboidCollider args={[2, 0.1, 2 * length]} position={[0, -0.1, -((length * 4) / 2) + 4 / 2]} />
+      <CuboidCollider args={[2, 0.1, 2 * length]} position={[0, -0.1, -((length * 4) / 2) + 4 / 2]} restitution={0.2} friction={1} />
     </RigidBody>
   );
 }
