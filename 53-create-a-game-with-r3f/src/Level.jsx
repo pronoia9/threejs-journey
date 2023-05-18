@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { BoxGeometry, ColorManagement, Euler, MeshStandardMaterial, Quaternion } from 'three';
 import { useFrame } from '@react-three/fiber';
 import { RigidBody } from '@react-three/rapier';
@@ -31,6 +31,7 @@ function BlockStart({ position = [0, 0, 0] }) {
 }
 
 function BlockSpinner({ position = [0, 0, 0] }) {
+  const [speed] = useState(Math.random() + 0.2);
   const obstacleRef = useRef();
 
   // Animation
@@ -38,7 +39,7 @@ function BlockSpinner({ position = [0, 0, 0] }) {
     const time = state.clock.getElapsedTime();
     // Rotation of the obstacle
     const rotation = new Quaternion();
-    rotation.setFromEuler(new Euler(0, time, 0));
+    rotation.setFromEuler(new Euler(0, time * speed, 0));
     obstacleRef.current.setNextKinematicRotation(rotation);
   });
 
