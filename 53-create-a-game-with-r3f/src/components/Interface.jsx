@@ -16,15 +16,15 @@ export default function Interface() {
       {/* Controls */}
       <div className='controls'>
         <div className='raw'>
-          <div className={`key ${forward ? 'active' : ''}`}></div>
+          <div className={`key ${forward ? 'active' : ''}`}>W</div>
         </div>
         <div className='raw'>
-          <div className={`key ${leftward ? 'active' : ''}`}></div>
-          <div className={`key ${backward ? 'active' : ''}`}></div>
-          <div className={`key ${rightward ? 'active' : ''}`}></div>
+          <div className={`key ${leftward ? 'active' : ''}`}>A</div>
+          <div className={`key ${backward ? 'active' : ''}`}>S</div>
+          <div className={`key ${rightward ? 'active' : ''}`}>D</div>
         </div>
         <div className='raw'>
-          <div className={`key ${space ? 'active' : ''} large`}></div>
+          <div className={`key ${space ? 'active' : ''} large`}>SPACE</div>
         </div>
       </div>
     </div>
