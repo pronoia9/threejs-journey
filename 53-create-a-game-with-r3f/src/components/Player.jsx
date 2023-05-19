@@ -54,7 +54,7 @@ export default function Player() {
     cameraTarget.copy(bodyPosition);
     cameraTarget.y += 0.25;
     // Lerping
-    smoothCameraPosition.lerp(cameraPosition, 0.1), smoothCameraTarget.lerp(cameraTarget, 0.1);
+    smoothCameraPosition.lerp(cameraPosition, 0.1 * delta), smoothCameraTarget.lerp(cameraTarget, 0.1 * delta);
     // Update camera
     state.camera.position.copy(smoothCameraPosition);
     state.camera.lookAt(smoothCameraTarget);
