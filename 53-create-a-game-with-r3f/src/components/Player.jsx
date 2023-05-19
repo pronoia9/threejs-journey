@@ -1,21 +1,22 @@
-import { useKeyboardControls } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
-import { RigidBody, useRapier } from '@react-three/rapier';
 import { useEffect, useRef } from 'react';
+import { Vector3 } from 'three';
+import { useFrame } from '@react-three/fiber';
+import { useKeyboardControls } from '@react-three/drei';
+import { RigidBody, useRapier } from '@react-three/rapier';
 
 export default function Player() {
-  const bodyRef = useRef();
+  const playerRef = useRef();
   const [subscribeKeys, getKeys] = useKeyboardControls();
   const { rapier, world } = useRapier();
   const rapierWorld = world.raw();
 
   // Jump
   const jump = () => {
-    const origin = bodyRef.current.translation(), direction = { x: 0, y: -1, z: 0 };
+    const origin = playerRef.current.translation(), direction = { x: 0, y: -1, z: 0 };
     origin.y -= 0.31;
     const ray = new rapier.Ray(origin, direction);
     const hit = rapierWorld.castRay(ray, 10, true);
-    if (hit.toi < 0.15) bodyRef.current.applyImpulse({ x: 0, y: 0.5, z: 0 });
+    if (hit.toi < 0.15) playerRef.current.applyImpulse({ x: 0, y: 0.5, z: 0 });
   }
   useEffect(() => {
     const unsubscribeJump = subscribeKeys(
@@ -27,6 +28,7 @@ export default function Player() {
   }, []);
 
   useFrame((state, delta) => {
+    // CONTROLS
     const { forward, rightward, backward, leftward } = getKeys();
     // Movement variables
     const impulse = { x: 0, y: 0, z: 0 }, torque = { x: 0, y: 0, z: 0 };
@@ -37,12 +39,26 @@ export default function Player() {
     if (backward) (impulse.z += impulseStrength), (torque.x += torqueStrength);
     if (leftward) (impulse.x -= impulseStrength), (torque.z += torqueStrength);
     // Apply movement
-    bodyRef.current.applyImpulse(impulse);
-    bodyRef.current.applyTorqueImpulse(torque);
+    playerRef.current.applyImpulse(impulse);
+    playerRef.current.applyTorqueImpulse(torque);
+
+    // CAMERA
+    const bodyPosition = playerRef.current.translation();
+    // Position
+    const cameraPosition = new Vector3();
+    cameraPosition.copy(bodyPosition);
+    cameraPosition.y += 0.65, cameraPosition.z += 2.25;
+    // Target
+    const cameraTarget = new Vector3();
+    cameraTarget.copy(bodyPosition);
+    cameraTarget.y += 0.25;
+    // Update camera
+    state.camera.position.copy(cameraPosition);
+    state.camera.lookAt(cameraTarget);
   });
 
   return (
-    <RigidBody ref={bodyRef} colliders='ball' restitution={0.2} friction={1} linearDamping={0.5} angularDamping={0.5} position={[0, 1, 0]}>
+    <RigidBody ref={playerRef} colliders='ball' restitution={0.2} friction={1} linearDamping={0.5} angularDamping={0.5} position={[0, 1, 0]}>
       <mesh castShadow>
         <icosahedronGeometry args={[0.3, 1]} />
         <meshStandardMaterial flatShading color='mediumpurple' />
