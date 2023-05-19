@@ -9,19 +9,22 @@ export default create(
       phase: 'ready',
       start: () => {
         set((state) => {
-          return state.phase === 'ready' ? { phase: 'playing' } : {};
+          return state.phase === 'ready' ? { phase: 'playing', startTime: Date.now() } : {};
         });
       },
       end: () => {
         set((state) => {
-          return state.phase === 'playing' ? { phase: 'ended' } : {};
+          return state.phase === 'playing' ? { phase: 'ended', endTime: Date.now() } : {};
         });
       },
       restart: () => {
         set((state) => {
-          return state.phase !== 'ready' ? { phase: 'ready' } : {};
+          return state.phase !== 'ready' ? { phase: 'ready', startTime: 0, endTime: 0 } : {};
         });
       },
+      // Time
+      startTime: 0,
+      endTime: 0,
     };
   })
 );
