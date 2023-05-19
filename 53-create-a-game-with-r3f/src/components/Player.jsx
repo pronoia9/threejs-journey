@@ -53,9 +53,11 @@ export default function Player() {
     const cameraTarget = new Vector3();
     cameraTarget.copy(bodyPosition);
     cameraTarget.y += 0.25;
+    // Lerping
+    smoothCameraPosition.lerp(cameraPosition, 0.1), smoothCameraTarget.lerp(cameraTarget, 0.1);
     // Update camera
-    state.camera.position.copy(cameraPosition);
-    state.camera.lookAt(cameraTarget);
+    state.camera.position.copy(smoothCameraPosition);
+    state.camera.lookAt(smoothCameraTarget);
   });
 
   return (
