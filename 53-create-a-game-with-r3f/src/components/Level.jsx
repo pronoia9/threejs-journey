@@ -11,12 +11,12 @@ export default function Level({ blocksCount = 5, types = [BlockSpinner, BlockLim
 
   return (
     <>
-      <BlockStart position={[0, 0, 0]} />
+      <BlockStart position={[0, 0, 0]} geometry={box} material={floor1} />
       {blocks.map((Block, index) => (
-        <Block key={`block-#${index}`} position={[0, 0, -index * 4 - 4]} />
+        <Block key={`block-#${index}`} position={[0, 0, -index * 4 - 4]} geometry={box} materials={{ floor: floor2, obstacle }} />
       ))}
-      <BlockEnd position={[0, 0, -blocksCount * 4 - 4]} />
-      <Bounds length={blocksCount + 2} />
+      <BlockEnd position={[0, 0, -blocksCount * 4 - 4]} geometry={box} material={floor1} />
+      <Bounds length={blocksCount + 2} material={wall} />
     </>
   );
 }
