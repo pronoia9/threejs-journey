@@ -1,4 +1,12 @@
+import { useKeyboardControls } from '@react-three/drei';
+
 export default function Interface() {
+  const forward = useKeyboardControls((state) => state.forward),
+    rightward = useKeyboardControls((state) => state.rightward),
+    backward = useKeyboardControls((state) => state.backward),
+    leftward = useKeyboardControls((state) => state.leftward),
+    space = useKeyboardControls((state) => state.space);
+
   return (
     <div className='interface'>
       {/* Time */}
@@ -8,15 +16,15 @@ export default function Interface() {
       {/* Controls */}
       <div className='controls'>
         <div className='raw'>
-          <div className='key'></div>
+          <div className={`key ${forward ? 'active' : ''}`}></div>
         </div>
         <div className='raw'>
-          <div className='key'></div>
-          <div className='key'></div>
-          <div className='key'></div>
+          <div className={`key ${leftward ? 'active' : ''}`}></div>
+          <div className={`key ${backward ? 'active' : ''}`}></div>
+          <div className={`key ${rightward ? 'active' : ''}`}></div>
         </div>
         <div className='raw'>
-          <div className='key large'></div>
+          <div className={`key ${space ? 'active' : ''} large`}></div>
         </div>
       </div>
     </div>
