@@ -21,7 +21,7 @@ export default create(
       },
       restart: () => {
         set((state) => {
-          return state.phase !== 'ready' ? { phase: 'ready', startTime: 0, endTime: 0 } : {};
+          return state.phase !== 'ready' ? { phase: 'ready', startTime: 0, endTime: 0, blocksSeed: Math.random() } : {};
         });
       },
       // Time
