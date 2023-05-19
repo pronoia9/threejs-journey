@@ -18,13 +18,14 @@ export default function Player() {
     if (hit.toi < 0.15) bodyRef.current.applyImpulse({ x: 0, y: 0.5, z: 0 });
   }
   useEffect(() => {
-    subscribeKeys(
+    const unsubscribeJump = subscribeKeys(
       // Selector (listener)
       (state) => state.jump,
       // Function for when jump is pressed
       (value) => {
         if (value) jump();
-       })
+      })
+    return () => { unsubscribeJump(); }
   }, []);
 
   useFrame((state, delta) => {
