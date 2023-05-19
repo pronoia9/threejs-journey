@@ -22,9 +22,7 @@ export default function Player() {
       // Selector (listener)
       (state) => state.jump,
       // Function for when jump is pressed
-      (value) => {
-        if (value) jump();
-      })
+      (value) => { if (value) jump(); })
     return () => { unsubscribeJump(); }
   }, []);
 
