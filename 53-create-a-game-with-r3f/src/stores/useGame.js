@@ -4,7 +4,9 @@ import { subscribeWithSelector } from 'zustand/middleware';
 export default create(
   subscribeWithSelector((set) => {
     return {
+      // Blocks/Levels
       blocksCount: 3,
+      blockSeed: 0,
       // Phases
       phase: 'ready',
       start: () => {
