@@ -1,13 +1,14 @@
 import { useMemo } from 'react';
+
 import { BlockStart, BlockSpinner, BlockLimbo, BlockAxe, BlockEnd, Bounds } from './';
 import { geometries, materials } from './utils';
 
 const { box } = geometries;
 const { floor1, floor2, obstacle, wall } = materials;
 
-export default function Level({ blocksCount = 5, types = [BlockSpinner, BlockLimbo, BlockAxe] }) {
+export default function Level({ blocksCount = 5, types = [BlockSpinner, BlockLimbo, BlockAxe], seed }) {
   // Generate a blocks array filled with random items from types
-  const blocks = useMemo(() => new Array(blocksCount).fill().map(() => types[Math.floor(Math.random() * types.length)]), [blocksCount, types]);
+  const blocks = useMemo(() => new Array(blocksCount).fill().map(() => types[Math.floor(Math.random() * types.length)]), [blocksCount, types, seed]);
 
   return (
     <>
