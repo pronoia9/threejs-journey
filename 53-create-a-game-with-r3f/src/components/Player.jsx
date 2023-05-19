@@ -9,7 +9,7 @@ export default function Player() {
   const [subscribeKeys, getKeys] = useKeyboardControls();
   const { rapier, world } = useRapier(); // jump/ray
   const rapierWorld = world.raw(); // ray 
-  const [ smoothCameraPosition ] = useState(new Vector3()), [ smoothCameraTarget ] = useState(new Vector3()); // lerp
+  const [ smoothCameraPosition ] = useState(new Vector3(10, 10, 10)), [ smoothCameraTarget ] = useState(new Vector3()); // lerp
 
   // Jump
   const jump = () => {
