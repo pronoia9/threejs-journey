@@ -12,7 +12,9 @@ export default function Player() {
   const { rapier, world } = useRapier(); // jump/ray
   const rapierWorld = world.raw(); // ray 
   const [smoothCameraPosition] = useState(new Vector3(10, 10, 10)), [smoothCameraTarget] = useState(new Vector3()); // lerp
+  const blocksCount = useGame((state) => state.blocksCount); // store
   const start = useGame((state) => state.start); // store
+  const end = useGame((state) => state.end); // store
 
   // Jump
   const jump = () => {
@@ -31,11 +33,11 @@ export default function Player() {
     return () => { unsubscribeJump(); }
   }, []);
 
-  // Update store (phase)
+  // Update store (start)
   useEffect(() => {
     const unsubscribeAny = subscribeKeys(() => { start(); })
     return () => { unsubscribeAny(); }
-  }, [])
+  }, []);
 
   useFrame((state, delta) => {
     // CONTROLS
@@ -53,20 +55,23 @@ export default function Player() {
     playerRef.current.applyTorqueImpulse(torque);
 
     // CAMERA
-    const bodyPosition = playerRef.current.translation();
+    const playerPosition = playerRef.current.translation();
     // Position
     const cameraPosition = new Vector3();
-    cameraPosition.copy(bodyPosition);
+    cameraPosition.copy(playerPosition);
     cameraPosition.y += 0.65, cameraPosition.z += 2.25;
     // Target
     const cameraTarget = new Vector3();
-    cameraTarget.copy(bodyPosition);
+    cameraTarget.copy(playerPosition);
     cameraTarget.y += 0.25;
     // Lerping
     smoothCameraPosition.lerp(cameraPosition, 5 * delta), smoothCameraTarget.lerp(cameraTarget, 5 * delta);
     // Update camera
     state.camera.position.copy(smoothCameraPosition);
     state.camera.lookAt(smoothCameraTarget);
+
+    // PHASES
+    if (playerPosition.z < -(blocksCount * 4 + 2)) end();
   });
 
   return (
