@@ -1,8 +1,15 @@
 import { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 
 export default function Lights() {
   const lightRef = useRef();
-  
+
+  useFrame((state) => {
+    lightRef.current.position.z = state.camera.position.z + 1 - 4;
+    lightRef.current.target.position.z = state.camera.position.z;
+    lightRef.current.target.updateMatrixWorld();
+  })
+
   return (
     <>
       <directionalLight
