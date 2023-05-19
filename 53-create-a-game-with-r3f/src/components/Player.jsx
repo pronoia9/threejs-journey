@@ -1,14 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Vector3 } from 'three';
 import { useFrame } from '@react-three/fiber';
 import { useKeyboardControls } from '@react-three/drei';
 import { RigidBody, useRapier } from '@react-three/rapier';
 
 export default function Player() {
-  const playerRef = useRef();
+  const playerRef = useRef(); // apply impulse + get position
   const [subscribeKeys, getKeys] = useKeyboardControls();
-  const { rapier, world } = useRapier();
-  const rapierWorld = world.raw();
+  const { rapier, world } = useRapier(); // jump/ray
+  const rapierWorld = world.raw(); // ray 
+  const [ smoothCameraPosition ] = useState(new Vector3()), [ smoothCameraTarget ] = useState(new Vector3()); // lerp
 
   // Jump
   const jump = () => {
