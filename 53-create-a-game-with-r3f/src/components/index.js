@@ -7,5 +7,6 @@ import BlockAxe from './BlockAxe';
 import BlockEnd from './BlockEnd';
 import Bounds from './Bounds';
 import Player from './Player';
+import Interface from './Interface';
 
-export { Lights, Level, BlockStart, BlockSpinner, BlockLimbo, BlockAxe, BlockEnd, Bounds, Player };
+export { Lights, Level, BlockStart, BlockSpinner, BlockLimbo, BlockAxe, BlockEnd, Bounds, Player, Interface };
