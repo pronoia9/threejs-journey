@@ -9,7 +9,7 @@ export default create(
       phase: 'ready',
       start: () => {
         set((state) => {
-          return state.phase !== 'playing' ? { phase: 'playing' } : {};
+          return state.phase === 'ready' ? { phase: 'playing' } : {};
         });
       },
       end: () => {
