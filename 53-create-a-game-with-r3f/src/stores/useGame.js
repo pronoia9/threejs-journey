@@ -6,7 +6,7 @@ export default create(
     return {
       // Blocks/Levels
       blocksCount: 3,
-      blockSeed: 0,
+      blocksSeed: 0,
       // Phases
       phase: 'ready',
       start: () => {
