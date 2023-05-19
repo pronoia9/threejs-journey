@@ -11,10 +11,14 @@ export default function Player() {
   const [subscribeKeys, getKeys] = useKeyboardControls();
   const { rapier, world } = useRapier(); // jump/ray
   const rapierWorld = world.raw(); // ray 
-  const [smoothCameraPosition] = useState(new Vector3(10, 10, 10)), [smoothCameraTarget] = useState(new Vector3()); // lerp
-  const blocksCount = useGame((state) => state.blocksCount); // store
-  const start = useGame((state) => state.start); // store
-  const end = useGame((state) => state.end); // store
+  // lerping states
+  const [smoothCameraPosition] = useState(new Vector3(10, 10, 10)),
+    [smoothCameraTarget] = useState(new Vector3());
+  // stores
+  const blocksCount = useGame((state) => state.blocksCount),
+    start = useGame((state) => state.start),
+    end = useGame((state) => state.end),
+    restart = useGame((state) => state.end);
 
   // Jump
   const jump = () => {
@@ -71,6 +75,7 @@ export default function Player() {
     state.camera.lookAt(smoothCameraTarget);
 
     // PHASES
+    if (playerPosition.y < -4) restart();
     if (playerPosition.z < -(blocksCount * 4 + 2)) end();
   });
 
