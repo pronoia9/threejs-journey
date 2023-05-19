@@ -10,7 +10,7 @@ export default function Player() {
   const playerRef = useRef(); // apply impulse + get position
   const [subscribeKeys, getKeys] = useKeyboardControls();
   const { rapier, world } = useRapier(); // jump/ray
-  const rapierWorld = world.raw(); // ray 
+  const rapierWorld = world.raw(); // ray
   // lerping states
   const [smoothCameraPosition] = useState(new Vector3(10, 10, 10)),
     [smoothCameraTarget] = useState(new Vector3());
@@ -18,37 +18,70 @@ export default function Player() {
   const blocksCount = useGame((state) => state.blocksCount),
     start = useGame((state) => state.start),
     end = useGame((state) => state.end),
-    restart = useGame((state) => state.end);
+    restart = useGame((state) => state.restart);
 
   // Jump
   const jump = () => {
-    const origin = playerRef.current.translation(), direction = { x: 0, y: -1, z: 0 };
+    const origin = playerRef.current.translation(),
+      direction = { x: 0, y: -1, z: 0 };
     origin.y -= 0.31;
     const ray = new rapier.Ray(origin, direction);
     const hit = rapierWorld.castRay(ray, 10, true);
     if (hit.toi < 0.15) playerRef.current.applyImpulse({ x: 0, y: 0.5, z: 0 });
-  }
+  };
+  // Subscribe to jump key
   useEffect(() => {
     const unsubscribeJump = subscribeKeys(
       // Selector (listener)
       (state) => state.jump,
       // Function for when jump is pressed
-      (value) => { if (value) jump(); })
-    return () => { unsubscribeJump(); }
+      (value) => {
+        if (value) jump();
+      }
+    );
+    return () => {
+      unsubscribeJump();
+    };
   }, []);
 
-  // Update store (start)
+  // Update store (Start phase)
   useEffect(() => {
-    const unsubscribeAny = subscribeKeys(() => { start(); })
-    return () => { unsubscribeAny(); }
+    const unsubscribeAny = subscribeKeys(() => {
+      start();
+    });
+    return () => {
+      unsubscribeAny();
+    };
   }, []);
 
+  // Reset phase
+  const reset = () => {
+    playerRef.current.setTranslation({ x: 0, y: 1, z: 0 });
+    playerRef.current.setLinvel({ x: 0, y: 1, z: 0 });
+    playerRef.current.setAngvel({ x: 0, y: 1, z: 0 });
+  };
+  // Subscribe to store changes (Reset phase)
+  useEffect(() => {
+    const unsubscribeReset = useGame.subscribe(
+      (state) => state.phase,
+      (value) => {
+        if (value === 'ready') reset();
+      }
+    );
+    return () => {
+      unsubscribeReset();
+    };
+  }, []);
+
+  // Frame
   useFrame((state, delta) => {
     // CONTROLS
     const { forward, rightward, backward, leftward } = getKeys();
     // Movement variables
-    const impulse = { x: 0, y: 0, z: 0 }, torque = { x: 0, y: 0, z: 0 };
-    const impulseStrength = 0.6 * delta, torqueStrength = 0.2 * delta;
+    const impulse = { x: 0, y: 0, z: 0 },
+      torque = { x: 0, y: 0, z: 0 };
+    const impulseStrength = 0.6 * delta,
+      torqueStrength = 0.2 * delta;
     // Keypresses
     if (forward) (impulse.z -= impulseStrength), (torque.x -= torqueStrength);
     if (rightward) (impulse.x += impulseStrength), (torque.z -= torqueStrength);
@@ -63,7 +96,7 @@ export default function Player() {
     // Position
     const cameraPosition = new Vector3();
     cameraPosition.copy(playerPosition);
-    cameraPosition.y += 0.65, cameraPosition.z += 2.25;
+    (cameraPosition.y += 0.65), (cameraPosition.z += 2.25);
     // Target
     const cameraTarget = new Vector3();
     cameraTarget.copy(playerPosition);
@@ -75,8 +108,8 @@ export default function Player() {
     state.camera.lookAt(smoothCameraTarget);
 
     // PHASES
-    if (playerPosition.y < -4) restart();
     if (playerPosition.z < -(blocksCount * 4 + 2)) end();
+    if (playerPosition.y < -4) restart();
   });
 
   return (
