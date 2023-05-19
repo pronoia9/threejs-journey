@@ -4,12 +4,15 @@ import { useFrame } from '@react-three/fiber';
 import { useKeyboardControls } from '@react-three/drei';
 import { RigidBody, useRapier } from '@react-three/rapier';
 
+import useGame from '../stores/useGame';
+
 export default function Player() {
   const playerRef = useRef(); // apply impulse + get position
   const [subscribeKeys, getKeys] = useKeyboardControls();
   const { rapier, world } = useRapier(); // jump/ray
   const rapierWorld = world.raw(); // ray 
-  const [ smoothCameraPosition ] = useState(new Vector3(10, 10, 10)), [ smoothCameraTarget ] = useState(new Vector3()); // lerp
+  const [smoothCameraPosition] = useState(new Vector3(10, 10, 10)), [smoothCameraTarget] = useState(new Vector3()); // lerp
+  const start = useGame((state) => state.start); // store
 
   // Jump
   const jump = () => {
@@ -27,6 +30,12 @@ export default function Player() {
       (value) => { if (value) jump(); })
     return () => { unsubscribeJump(); }
   }, []);
+
+  // Update store (phase)
+  useEffect(() => {
+    const unsubscribeAny = subscribeKeys(() => { start(); })
+    return () => { unsubscribeAny(); }
+  }, [])
 
   useFrame((state, delta) => {
     // CONTROLS
