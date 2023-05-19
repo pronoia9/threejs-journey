@@ -33,3 +33,18 @@ body,
   text-align: center;
   padding-top: 5px;
 }
+
+.restart {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  color: #fff;
+  font-size: 80px;
+  background: #00000033;
+  padding-top: 10px;
+  pointer-events: auto;
+  cursor: pointer;
+}
