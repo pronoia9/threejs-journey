@@ -5,7 +5,7 @@ export default create(
   subscribeWithSelector((set) => {
     return {
       // Blocks/Levels
-      blocksCount: 3,
+      blocksCount: 10,
       blocksSeed: 0,
       // Phases
       phase: 'ready',
