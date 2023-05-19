@@ -5,8 +5,20 @@ export default create((set) => {
     blocksCount: 3,
     // Phases
     phase: 'ready',
-    start: () => { set(() => { return { phase: 'playing' }; }); },
-    end: () => { set(() => { return { phase: 'ended' }; }); },
-    restart: () => { set(() => { return { phase: 'ready' }; }); },
+    start: () => {
+      set((state) => {
+        return state.phase !== 'playing' ? { phase: 'playing' } : {};
+      });
+    },
+    end: () => {
+      set((state) => {
+        return state.phase === 'playing' ? { phase: 'ended' } : {};
+      });
+    },
+    restart: () => {
+      set((state) => {
+        return state.phase !== 'ready' ? { phase: 'ready' } : {};
+      });
+    },
   };
 });
