@@ -1,22 +1,19 @@
 import { useRef, useState } from 'react';
-import { Euler, Quaternion } from 'three';
 import { useFrame } from '@react-three/fiber';
 import { RigidBody } from '@react-three/rapier';
 
-import { geometries, materials } from './utils';
+import { geometries, materials } from '../utils';
 const { floor2, obstacle } = materials;
 
-export default function BlockSpinner({ position = [0, 0, 0], geometry = geometries.box, materials }) {
-  const [spin] = useState((Math.random() + 0.2) * (Math.random() < 0.5 ? -1 : 1));
+export default function BlockLimbo({ position = [0, 0, 0], geometry = geometries.box, materials }) {
+  const [offset] = useState(Math.random() * Math.PI * 2);
   const obstacleRef = useRef();
 
   // Animation
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
-    // Rotation of the obstacle
-    const rotation = new Quaternion();
-    rotation.setFromEuler(new Euler(0, time * spin, 0));
-    obstacleRef.current.setNextKinematicRotation(rotation);
+    const y = Math.sin(time + offset) + 1.15;
+    obstacleRef.current.setNextKinematicTranslation({ x: position[0], y, z: position[2] });
   });
 
   return (

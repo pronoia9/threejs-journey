@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { RigidBody } from '@react-three/rapier';
 
-import { geometries, materials } from './utils';
+import { geometries, materials } from '../utils';
 const { floor2, obstacle } = materials;
 
 export default function BlockAxe({ position = [0, 0, 0], geometry = geometries.box, materials }) {
