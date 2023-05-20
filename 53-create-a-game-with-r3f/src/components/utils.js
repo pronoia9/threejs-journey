@@ -10,8 +10,8 @@ export const geometries = {
 
 // Materials
 export const materials = {
-  floor1: new MeshStandardMaterial({ color: 'limegreen' }),
-  floor2: new MeshStandardMaterial({ color: 'greenyellow' }),
-  obstacle: new MeshStandardMaterial({ color: 'orangered' }),
-  wall: new MeshStandardMaterial({ color: 'slategrey' }),
+  floor1: new MeshStandardMaterial({ color: 'limegreen', metalness: 0, roughness: 0 }),
+  floor2: new MeshStandardMaterial({ color: 'greenyellow', metalness: 0, roughness: 0 }),
+  obstacle: new MeshStandardMaterial({ color: 'orangered', metalness: 0, roughness: 1 }),
+  wall: new MeshStandardMaterial({ color: 'slategrey', metalness: 0, roughness: 0 }),
 };
